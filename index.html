@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOBLE ARC | AI 유튜브 자동화 솔루션</title>
+<meta name="description" content="NOBLE ARC는 AI 기반 유튜브 롱폼/숏폼 콘텐츠 자동화 솔루션입니다. 대본 생성부터 영상 렌더링까지 원클릭으로 완성하세요.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --purple: #7c3aed;
+    --blue: #2563eb;
+    --dark: #0a0a0f;
+    --dark2: #111827;
+    --gray: #6b7280;
+    --light: #f9fafb;
+  }
+  body { font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif; background: var(--dark); color: #fff; line-height: 1.6; }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+    background: rgba(10,10,15,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo { font-size: 20px; font-weight: 800; letter-spacing: 2px;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; color: #9ca3af; }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta { background: linear-gradient(135deg, var(--purple), var(--blue));
+    padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 120px 24px 80px;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.15) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(124,58,237,0.15); border: 1px solid rgba(124,58,237,0.3);
+    padding: 6px 16px; border-radius: 99px; font-size: 13px; color: #a78bfa;
+    margin-bottom: 32px;
+  }
+  .hero h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; line-height: 1.1;
+    letter-spacing: -1px; margin-bottom: 24px; }
+  .hero h1 span { background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { font-size: clamp(16px, 2vw, 20px); color: #9ca3af; max-width: 600px; margin-bottom: 48px; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary { background: linear-gradient(135deg, var(--purple), var(--blue));
+    padding: 16px 36px; border-radius: 10px; font-size: 16px; font-weight: 700;
+    box-shadow: 0 0 40px rgba(124,58,237,0.4); transition: opacity .2s; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-secondary { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    padding: 16px 36px; border-radius: 10px; font-size: 16px; font-weight: 600;
+    transition: background .2s; }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+  /* STATS */
+  .stats { display: flex; justify-content: center; gap: 64px; padding: 64px 24px;
+    border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);
+    flex-wrap: wrap; }
+  .stat-item { text-align: center; }
+  .stat-num { font-size: 40px; font-weight: 900;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .stat-label { font-size: 14px; color: var(--gray); margin-top: 4px; }
+
+  /* FEATURES */
+  .section { padding: 96px 24px; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 13px; color: #a78bfa; letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 800; margin-bottom: 16px; }
+  .section-sub { color: var(--gray); max-width: 560px; margin-bottom: 64px; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .feature-card {
+    background: var(--dark2); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 32px;
+    transition: border-color .2s, transform .2s;
+  }
+  .feature-card:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-4px); }
+  .feature-icon { font-size: 32px; margin-bottom: 16px; }
+  .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .feature-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+  /* HOW IT WORKS */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; position: relative; }
+  .step { text-align: center; }
+  .step-num { width: 48px; height: 48px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px; margin: 0 auto 16px; }
+  .step-title { font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 14px; color: var(--gray); }
+
+  /* PRICING */
+  .pricing-wrap { display: flex; justify-content: center; }
+  .pricing-card {
+    background: var(--dark2); border: 1px solid rgba(124,58,237,0.4);
+    border-radius: 24px; padding: 48px; max-width: 480px; width: 100%;
+    box-shadow: 0 0 60px rgba(124,58,237,0.15); text-align: center;
+  }
+  .pricing-badge { background: linear-gradient(135deg, var(--purple), var(--blue));
+    display: inline-block; padding: 4px 16px; border-radius: 99px;
+    font-size: 12px; font-weight: 700; margin-bottom: 24px; }
+  .pricing-name { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .pricing-price { font-size: 56px; font-weight: 900; margin: 24px 0 8px;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .pricing-price span { font-size: 20px; }
+  .pricing-desc { color: var(--gray); font-size: 14px; margin-bottom: 32px; }
+  .pricing-features { text-align: left; margin-bottom: 40px; }
+  .pricing-features li { display: flex; align-items: center; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 15px; }
+  .pricing-features li:last-child { border-bottom: none; }
+  .check { color: #a78bfa; font-weight: 700; }
+
+  /* FAQ */
+  .faq-list { max-width: 720px; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); padding: 24px 0; }
+  .faq-q { font-weight: 700; margin-bottom: 10px; font-size: 16px; }
+  .faq-a { color: var(--gray); font-size: 14px; line-height: 1.7; }
+
+  /* POLICY */
+  .policy-section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+  .policy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 48px; }
+  .policy-card { background: var(--dark2); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 28px; }
+  .policy-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: #a78bfa; }
+  .policy-card p, .policy-card li { font-size: 13px; color: var(--gray); line-height: 1.8; }
+  .policy-card ul { padding-left: 16px; }
+  .policy-card li { margin-bottom: 4px; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 48px 24px;
+    text-align: center; color: var(--gray); font-size: 13px; }
+  .footer-logo { font-size: 18px; font-weight: 800; letter-spacing: 2px;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 16px; }
+  footer p { margin-top: 8px; }
+  .footer-biz { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: left; display: inline-block; line-height: 2; }
+  .footer-biz span { margin-right: 24px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .stats { gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NOBLE ARC</div>
+  <div class="nav-links">
+    <a href="#features">기능</a>
+    <a href="#how">사용방법</a>
+    <a href="#pricing">가격</a>
+    <a href="#faq">FAQ</a>
+    <a href="#policy">구매정책</a>
+  </div>
+  <a href="#pricing" class="nav-cta">구매하기</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🤖 AI 기반 유튜브 자동화</div>
+  <h1>유튜브 영상 제작,<br><span>AI가 전부 해드립니다</span></h1>
+  <p>대본 작성부터 이미지 생성, 음성 합성, 자막, 렌더링까지 — 클릭 몇 번으로 완성형 유튜브 영상을 만드세요.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn-primary">지금 시작하기</a>
+    <a href="#features" class="btn-secondary">기능 살펴보기</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">7개</div>
+    <div class="stat-label">지원 언어</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100+</div>
+    <div class="stat-label">씬 지원</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5분</div>
+    <div class="stat-label">영상 1편 완성</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4K</div>
+    <div class="stat-label">고화질 출력</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="features">
+  <div class="section-label">핵심 기능</div>
+  <h2 class="section-title">필요한 모든 것이<br>하나에 담겨 있습니다</h2>
+  <p class="section-sub">유튜브 채널 운영에 필요한 전 과정을 자동화합니다.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">✍️</div>
+      <div class="feature-title">AI 대본 자동 생성</div>
+      <div class="feature-desc">주제만 입력하면 Gemini AI가 완성도 높은 대본을 자동으로 작성합니다. 씬별 구성, 길이, 톤 모두 조절 가능합니다.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎨</div>
+      <div class="feature-title">AI 이미지 자동 생성</div>
+      <div class="feature-desc">대본의 내용과 맥락을 분석해 각 씬에 맞는 이미지를 자동 생성합니다. 다양한 아트 스타일 선택 가능.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎙️</div>
+      <div class="feature-title">고품질 AI 음성 합성</div>
+      <div class="feature-desc">Gemini, MiniMax, ElevenLabs, OpenAI 등 4가지 TTS 엔진 지원. 7개 언어, 다양한 목소리 선택 가능.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">정확한 자막 동기화</div>
+      <div class="feature-desc">AI 음성인식(Whisper, Groq)으로 단어 단위 자막 싱크. 폰트, 크기, 색상, 위치 모두 커스터마이징 가능.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎬</div>
+      <div class="feature-title">원클릭 영상 렌더링</div>
+      <div class="feature-desc">FFmpeg 기반 고품질 렌더링. BGM 자동 삽입, 화면 전환 효과, 인트로/아웃트로 설정까지 모두 자동.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📺</div>
+      <div class="feature-title">유튜브 자동 업로드</div>
+      <div class="feature-desc">완성된 영상을 유튜브에 바로 업로드. 제목, 설명, 태그, 썸네일까지 한 번에 설정 가능.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background: rgba(255,255,255,0.02); padding: 96px 24px;" id="how">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-label">사용 방법</div>
+    <h2 class="section-title" style="margin-bottom:64px;">4단계로 영상 완성</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">주제 입력</div>
+        <div class="step-desc">영상 주제와 기본 설정을 입력합니다.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">AI 대본 생성</div>
+        <div class="step-desc">AI가 완성된 대본과 이미지 프롬프트를 생성합니다.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">미디어 생성</div>
+        <div class="step-desc">이미지와 음성이 자동으로 생성됩니다.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">렌더링 & 업로드</div>
+        <div class="step-desc">영상 완성 후 유튜브에 바로 업로드합니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-label" style="text-align:center;">가격</div>
+  <h2 class="section-title" style="text-align:center; margin-bottom:16px;">단 한 번의 결제로<br>영구 사용</h2>
+  <p class="section-sub" style="text-align:center; margin: 0 auto 64px;">구독 없이 한 번 구매하면 평생 사용 가능합니다.</p>
+  <div class="pricing-wrap">
+    <div class="pricing-card">
+      <div class="pricing-badge">LIFETIME</div>
+      <div class="pricing-name">NOBLE ARC Longform</div>
+      <div class="pricing-price"><span>₩</span>990,000</div>
+      <div class="pricing-desc">1회 결제 · 영구 라이선스 · 무료 업데이트</div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> AI 대본 자동 생성</li>
+        <li><span class="check">✓</span> AI 이미지 자동 생성</li>
+        <li><span class="check">✓</span> 4가지 TTS 엔진 지원</li>
+        <li><span class="check">✓</span> 7개 언어 지원</li>
+        <li><span class="check">✓</span> 정밀 자막 자동 동기화</li>
+        <li><span class="check">✓</span> 유튜브 자동 업로드</li>
+        <li><span class="check">✓</span> 영구 무료 업데이트</li>
+        <li><span class="check">✓</span> 1:1 이메일 지원</li>
+      </ul>
+      <a href="mailto:contact@noblearc.kr" class="btn-primary" style="display:block; text-align:center;">구매 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background: rgba(255,255,255,0.02); padding: 96px 24px;" id="faq">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-label">자주 묻는 질문</div>
+    <h2 class="section-title" style="margin-bottom:48px;">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">어떤 PC 사양이 필요한가요?</div>
+        <div class="faq-a">Windows 10/11 64bit, RAM 16GB 이상 권장. 인터넷 연결 필수.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">API 키가 별도로 필요한가요?</div>
+        <div class="faq-a">네, Gemini API 키(무료)가 기본으로 필요합니다. 고품질 TTS나 이미지 생성을 위해 추가 API 키를 사용할 수 있습니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">구독료가 추가로 발생하나요?</div>
+        <div class="faq-a">프로그램 자체는 1회 결제로 영구 사용 가능합니다. 단, 사용하는 AI API 서비스의 요금은 별도입니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">업데이트는 어떻게 받나요?</div>
+        <div class="faq-a">프로그램 실행 시 새 버전이 있으면 자동으로 알림이 뜨며, 클릭 한 번으로 업데이트됩니다. 업데이트는 무료입니다.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">환불 정책은 어떻게 되나요?</div>
+        <div class="faq-a">구매 후 7일 이내, 정상 사용이 불가한 기술적 결함이 확인된 경우 전액 환불해드립니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY -->
+<section style="background: rgba(255,255,255,0.02); padding: 80px 24px;" id="policy">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-label">구매 정책</div>
+    <h2 class="section-title" style="margin-bottom:8px;">배송 · 환불 · 취소 규정</h2>
+    <p style="color:var(--gray); font-size:14px; margin-bottom:0;">본 서비스는 디지털 소프트웨어로, 구매 후 즉시 라이선스 키가 이메일로 발송됩니다.</p>
+    <div class="policy-grid">
+      <div class="policy-card">
+        <h3>📦 배송 정책</h3>
+        <ul>
+          <li>본 상품은 디지털 소프트웨어(EXE 설치파일 + 라이선스 키)입니다.</li>
+          <li>물리적 배송은 없으며, 결제 완료 즉시 등록된 이메일로 다운로드 링크 및 라이선스 키가 자동 발송됩니다.</li>
+          <li>이메일 미수신 시 스팸함을 확인하시거나, 고객센터(010-4241-9745)로 문의해 주세요.</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <h3>🔄 교환 정책</h3>
+        <ul>
+          <li>디지털 소프트웨어 특성상 단순 변심에 의한 교환은 불가합니다.</li>
+          <li>프로그램 설치/실행 오류 등 기술적 결함 발생 시 동일 제품으로 재발급 처리합니다.</li>
+          <li>라이선스 키 분실 또는 기기 변경의 경우 고객센터로 문의 주세요.</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <h3>💳 환불 정책</h3>
+        <ul>
+          <li><strong style="color:#fff;">환불 가능:</strong> 구매 후 7일 이내, 프로그램이 정상적으로 실행되지 않는 기술적 결함이 확인된 경우 전액 환불</li>
+          <li><strong style="color:#fff;">환불 불가:</strong> 라이선스 키 발급 후 단순 변심, 이미 정상 사용한 경우, 구매 후 7일 경과 후</li>
+          <li>환불 요청: 010-4241-9745 또는 이메일 문의</li>
+        </ul>
+      </div>
+      <div class="policy-card">
+        <h3>❌ 취소 정책</h3>
+        <ul>
+          <li>결제 완료 전: 언제든지 취소 가능합니다.</li>
+          <li>라이선스 키 발급 전(결제 직후): 고객센터 문의 시 취소 가능합니다.</li>
+          <li>라이선스 키 발급 후: 취소 불가 (기술적 결함 시 환불 정책 적용)</li>
+          <li>취소 문의: 010-4241-9745 (평일 10:00 ~ 18:00)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">NOBLE ARC</div>
+  <p>AI 기반 유튜브 콘텐츠 자동화 솔루션</p>
+  <div class="footer-biz">
+    <span><strong style="color:#d1d5db;">상호명</strong> 노블아크(Noble Arc)</span>
+    <span><strong style="color:#d1d5db;">대표자</strong> 채정옥</span><br>
+    <span><strong style="color:#d1d5db;">사업자등록번호</strong> 451-01-03916</span>
+    <span><strong style="color:#d1d5db;">통신판매업신고번호</strong> 제 2026-안양동안-0412호</span><br>
+    <span><strong style="color:#d1d5db;">주소</strong> 경기도 안양시 동안구 관평로69번길 8-13, 1층 일부호(평촌동)</span><br>
+    <span><strong style="color:#d1d5db;">연락처</strong> 010-4241-9745</span>
+    <span><strong style="color:#d1d5db;">이메일</strong> contact@noblearc.kr</span>
+  </div>
+  <p style="margin-top:24px;">© 2026 NOBLE ARC. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
