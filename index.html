@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOBLE ARC | AI 유튜브 자동화 솔루션</title>
+<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 <meta name="description" content="NOBLE ARC는 AI 기반 유튜브 롱폼/숏폼 콘텐츠 자동화 솔루션입니다. 대본 생성부터 영상 렌더링까지 원클릭으로 완성하세요.">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -276,8 +277,29 @@
   <div class="section-label" style="text-align:center;">가격</div>
   <h2 class="section-title" style="text-align:center; margin-bottom:16px;">단 한 번의 결제로<br>영구 사용</h2>
   <p class="section-sub" style="text-align:center; margin: 0 auto 64px;">구독 없이 한 번 구매하면 평생 사용 가능합니다.</p>
-  <div class="pricing-wrap">
-    <div class="pricing-card">
+  <div class="pricing-wrap" style="display:flex; gap:32px; justify-content:center; flex-wrap:wrap; align-items:flex-start;">
+
+    <!-- Shorts -->
+    <div class="pricing-card" style="flex:1; min-width:280px; max-width:400px; position:relative;">
+      <div class="pricing-badge" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">SHORTS</div>
+      <div class="pricing-name">NOBLE ARC Shorts</div>
+      <div class="pricing-price"><span>₩</span>290,000</div>
+      <div class="pricing-desc">1회 결제 · 영구 라이선스 · 무료 업데이트</div>
+      <ul class="pricing-features">
+        <li><span class="check">✓</span> 쇼츠 AI 대본 자동 생성</li>
+        <li><span class="check">✓</span> AI 이미지 자동 생성</li>
+        <li><span class="check">✓</span> 4가지 TTS 엔진 지원</li>
+        <li><span class="check">✓</span> 씬별 자막 자동 분할</li>
+        <li><span class="check">✓</span> 유튜브 자동 업로드</li>
+        <li><span class="check">✓</span> 대량 생산 자동화</li>
+        <li><span class="check">✓</span> 영구 무료 업데이트</li>
+        <li><span class="check">✓</span> 1:1 이메일 지원</li>
+      </ul>
+      <button onclick="openBuyModal('shorts')" class="btn-primary" style="width:100%; cursor:pointer; border:none; font-size:16px; padding:14px;">지금 구매하기</button>
+    </div>
+
+    <!-- Longform -->
+    <div class="pricing-card" style="flex:1; min-width:280px; max-width:400px;">
       <div class="pricing-badge">LIFETIME</div>
       <div class="pricing-name">NOBLE ARC Longform</div>
       <div class="pricing-price"><span>₩</span>990,000</div>
@@ -294,8 +316,40 @@
       </ul>
       <a href="mailto:contact@noblearc.kr" class="btn-primary" style="display:block; text-align:center;">구매 문의하기</a>
     </div>
+
   </div>
 </section>
+
+<!-- 구매 모달 -->
+<div id="buyModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#111827; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:40px; width:100%; max-width:440px; margin:24px;">
+    <h3 style="font-size:20px; font-weight:700; margin-bottom:8px;" id="modalTitle">NOBLE ARC Shorts 구매</h3>
+    <p style="color:#9ca3af; font-size:14px; margin-bottom:24px;">결제 완료 즉시 라이선스 키가 화면에 표시됩니다.<br>반드시 저장해두세요.</p>
+    <label style="font-size:13px; color:#d1d5db; display:block; margin-bottom:6px;">이메일 주소 <span style="color:#ef4444;">*</span></label>
+    <input id="buyerEmail" type="email" placeholder="example@email.com"
+      style="width:100%; padding:12px 16px; background:#1f2937; border:1px solid #374151; border-radius:8px; color:#fff; font-size:14px; outline:none; margin-bottom:20px;">
+    <div style="display:flex; gap:12px;">
+      <button onclick="closeBuyModal()" style="flex:1; padding:12px; background:#1f2937; border:1px solid #374151; border-radius:8px; color:#9ca3af; cursor:pointer; font-size:14px;">취소</button>
+      <button onclick="startPayment()" id="payBtn" style="flex:2; padding:12px; background:linear-gradient(135deg,#7c3aed,#2563eb); border:none; border-radius:8px; color:#fff; font-weight:600; cursor:pointer; font-size:14px;">결제하기</button>
+    </div>
+    <p id="modalMsg" style="color:#ef4444; font-size:12px; margin-top:12px; min-height:16px; text-align:center;"></p>
+  </div>
+</div>
+
+<!-- 라이선스 발급 완료 모달 -->
+<div id="licenseModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#111827; border:1px solid rgba(124,58,237,0.4); border-radius:16px; padding:40px; width:100%; max-width:480px; margin:24px; text-align:center;">
+    <div style="font-size:48px; margin-bottom:16px;">🎉</div>
+    <h3 style="font-size:22px; font-weight:700; margin-bottom:8px;">결제 완료!</h3>
+    <p style="color:#9ca3af; font-size:14px; margin-bottom:24px;">아래 라이선스 키를 복사하여 프로그램 활성화에 사용하세요.</p>
+    <div style="background:#0a0a0f; border:1px solid rgba(124,58,237,0.5); border-radius:10px; padding:16px 20px; margin-bottom:16px;">
+      <div id="licenseKey" style="font-size:20px; font-weight:700; letter-spacing:2px; color:#a78bfa; word-break:break-all;"></div>
+    </div>
+    <button onclick="copyLicense()" style="width:100%; padding:12px; background:linear-gradient(135deg,#7c3aed,#2563eb); border:none; border-radius:8px; color:#fff; font-weight:600; cursor:pointer; font-size:15px; margin-bottom:12px;" id="copyBtn">라이선스 키 복사</button>
+    <p style="color:#6b7280; font-size:12px; margin-bottom:16px;">이 키는 화면에만 표시됩니다. 반드시 지금 복사하거나 메모해두세요.</p>
+    <button onclick="closeLicenseModal()" style="padding:8px 24px; background:#1f2937; border:1px solid #374151; border-radius:8px; color:#9ca3af; cursor:pointer; font-size:13px;">닫기</button>
+  </div>
+</div>
 
 <!-- FAQ -->
 <section style="background: rgba(255,255,255,0.02); padding: 96px 24px;" id="faq">
@@ -387,5 +441,126 @@
   <p style="margin-top:24px;">© 2026 NOBLE ARC. All rights reserved.</p>
 </footer>
 
+<script>
+// ── 설정 ──────────────────────────────────────────────────────
+const STORE_ID    = 'store-2e5479e3-45ff-4aaa-9f57-8cf9dcec241c';
+const CHANNEL_KEY = 'channel-key-696a6114-0c77-49ec-a1cf-73c128cbab19';
+const FB_PROJECT  = 'noblearc-70d64';
+const FB_API_KEY  = 'AIzaSyBm3pfOFb6Dx2PhdxaO-0pzd1hW5NDEnFI';
+
+const PRODUCTS = {
+  shorts: { name: 'NOBLE ARC Shorts 영구 라이선스', amount: 290000, collection: 'shorts_licenses' }
+};
+
+let currentProduct = 'shorts';
+
+// ── 모달 ──────────────────────────────────────────────────────
+function openBuyModal(product) {
+  currentProduct = product;
+  const p = PRODUCTS[product];
+  document.getElementById('modalTitle').textContent = p.name.replace(' 영구 라이선스','') + ' 구매';
+  document.getElementById('buyerEmail').value = '';
+  document.getElementById('modalMsg').textContent = '';
+  document.getElementById('payBtn').disabled = false;
+  document.getElementById('payBtn').textContent = '결제하기 (₩' + p.amount.toLocaleString() + ')';
+  document.getElementById('buyModal').style.display = 'flex';
+}
+function closeBuyModal() {
+  document.getElementById('buyModal').style.display = 'none';
+}
+function closeLicenseModal() {
+  document.getElementById('licenseModal').style.display = 'none';
+}
+
+// ── 라이선스 키 생성 ──────────────────────────────────────────
+function genLicenseKey() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const seg = () => Array.from({length:4}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
+  return `NARC-${seg()}-${seg()}-${seg()}`;
+}
+
+// ── Firebase 라이선스 저장 ────────────────────────────────────
+async function saveToFirebase(collection, licKey, email, paymentId) {
+  const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/${collection}/${licKey}?key=${FB_API_KEY}`;
+  const res = await fetch(url, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields: {
+      active:      { booleanValue: true },
+      activatedAt: { timestampValue: new Date().toISOString() },
+      buyerEmail:  { stringValue: email },
+      type:        { stringValue: 'lifetime' },
+      paymentId:   { stringValue: paymentId }
+    }})
+  });
+  if (!res.ok) throw new Error('Firebase 저장 실패: ' + res.status);
+}
+
+// ── 결제 시작 ─────────────────────────────────────────────────
+async function startPayment() {
+  const email = document.getElementById('buyerEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('modalMsg').textContent = '올바른 이메일을 입력해주세요.';
+    return;
+  }
+  const p = PRODUCTS[currentProduct];
+  const payBtn = document.getElementById('payBtn');
+  payBtn.disabled = true;
+  payBtn.textContent = '결제창 열는 중...';
+  document.getElementById('modalMsg').textContent = '';
+
+  const paymentId = 'NARC-' + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
+
+  try {
+    const result = await PortOne.requestPayment({
+      storeId:    STORE_ID,
+      channelKey: CHANNEL_KEY,
+      paymentId:  paymentId,
+      orderName:  p.name,
+      totalAmount: p.amount,
+      currency:   'KRW',
+      payMethod:  'CARD',
+      customer: { email, fullName: '구매자' }
+    });
+
+    if (result && result.code !== undefined) {
+      // 결제 실패 or 취소
+      document.getElementById('modalMsg').textContent = result.message || '결제가 취소되었습니다.';
+      payBtn.disabled = false;
+      payBtn.textContent = '결제하기 (₩' + p.amount.toLocaleString() + ')';
+      return;
+    }
+
+    // 결제 성공 → 라이선스 발급
+    payBtn.textContent = '라이선스 발급 중...';
+    const licKey = genLicenseKey();
+    await saveToFirebase(p.collection, licKey, email, paymentId);
+
+    // 성공 모달
+    closeBuyModal();
+    document.getElementById('licenseKey').textContent = licKey;
+    document.getElementById('licenseModal').style.display = 'flex';
+
+  } catch (e) {
+    document.getElementById('modalMsg').textContent = '오류: ' + e.message;
+    payBtn.disabled = false;
+    payBtn.textContent = '결제하기 (₩' + p.amount.toLocaleString() + ')';
+  }
+}
+
+// ── 라이선스 복사 ─────────────────────────────────────────────
+function copyLicense() {
+  const key = document.getElementById('licenseKey').textContent;
+  navigator.clipboard.writeText(key).then(() => {
+    document.getElementById('copyBtn').textContent = '✓ 복사 완료!';
+    setTimeout(() => { document.getElementById('copyBtn').textContent = '라이선스 키 복사'; }, 2000);
+  });
+}
+
+// ESC로 모달 닫기
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeBuyModal(); closeLicenseModal(); }
+});
+</script>
 </body>
 </html>
