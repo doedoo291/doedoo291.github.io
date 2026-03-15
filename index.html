@@ -824,10 +824,15 @@ async function doEmailAuth() {
 async function doGoogleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider();
   try {
-    await auth.signInWithRedirect(provider);
-    // 리다이렉트 후 페이지가 돌아오면 onAuthStateChanged에서 처리됨
+    const result = await auth.signInWithPopup(provider);
+    if (result && result.user) closeAuthModal();
   } catch(e) {
-    document.getElementById('authMsg').textContent = '구글 로그인에 실패했습니다: ' + e.message;
+    if (e.code === 'auth/popup-blocked' || e.code === 'auth/cancelled-popup-request') {
+      // 팝업 차단된 경우 리다이렉트로 폴백
+      try { await auth.signInWithRedirect(provider); } catch(e2) {}
+    } else {
+      document.getElementById('authMsg').textContent = '구글 로그인에 실패했습니다: ' + e.message;
+    }
   }
 }
 async function doLogout() {
