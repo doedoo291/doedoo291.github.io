@@ -272,6 +272,152 @@
   </div>
 </section>
 
+<!-- SUBSCRIPTION PRICING -->
+<section class="section" id="subscription" style="background:linear-gradient(180deg, rgba(124,58,237,0.04) 0%, transparent 100%);">
+  <div style="text-align:center; margin-bottom:56px;">
+    <div class="section-label">구독 요금제</div>
+    <h2 class="section-title" style="margin-bottom:16px;">필요한 만큼만<br><span style="background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">유연하게 사용하세요</span></h2>
+    <p class="section-sub" style="margin:0 auto 40px; max-width:480px;">구독 기간이 길수록 더 큰 할인 혜택.<br>언제든 시작하고, 부담 없이 사용하세요.</p>
+
+    <!-- 기간 탭 -->
+    <div id="sub-tabs" style="display:inline-flex; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:5px; gap:4px;">
+      <button class="sub-tab on" data-p="1" onclick="subTab(this)">1개월</button>
+      <button class="sub-tab" data-p="3" onclick="subTab(this)">3개월</button>
+      <button class="sub-tab" data-p="6" onclick="subTab(this)">6개월</button>
+      <button class="sub-tab" data-p="12" onclick="subTab(this)">1년 <span style="font-size:10px;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700;">BEST</span></button>
+    </div>
+  </div>
+
+  <!-- 카드 -->
+  <div style="display:flex; gap:24px; justify-content:center; flex-wrap:wrap; align-items:stretch; max-width:1080px; margin:0 auto;">
+
+    <!-- 쇼츠 카드 -->
+    <div class="sub-card" style="flex:1; min-width:280px; max-width:320px; background:var(--dark2); border:1px solid rgba(14,165,233,0.25); border-radius:24px; padding:40px 32px; position:relative; display:flex; flex-direction:column;">
+      <div style="display:inline-block; padding:4px 14px; border-radius:99px; font-size:11px; font-weight:700; letter-spacing:1px; background:linear-gradient(135deg,#0ea5e9,#6366f1); margin-bottom:20px; align-self:flex-start;">SHORTS</div>
+      <div style="font-size:18px; font-weight:800; margin-bottom:6px;">NOBLE ARC Shorts</div>
+      <div style="font-size:13px; color:#6b7280; margin-bottom:28px;">쇼츠 전용 · AI 영상 자동화</div>
+      <div style="margin-bottom:6px;">
+        <span style="font-size:13px; color:#6b7280; text-decoration:line-through;" id="s-orig"></span>
+        <span id="s-discount" style="font-size:12px; font-weight:700; color:#34d399; background:rgba(52,211,153,0.12); padding:2px 8px; border-radius:6px; margin-left:6px;"></span>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:6px; margin-bottom:8px;">
+        <span style="font-size:48px; font-weight:900; background:linear-gradient(135deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent; line-height:1;" id="s-price"></span>
+        <span style="font-size:14px; color:#9ca3af; margin-bottom:10px;">/월</span>
+      </div>
+      <div style="font-size:13px; color:#6b7280; margin-bottom:32px;" id="s-total"></div>
+      <ul style="list-style:none; margin-bottom:32px; flex:1;">
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#0ea5e9;">✓</span> 쇼츠 AI 대본 자동 생성</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#0ea5e9;">✓</span> AI 이미지 자동 생성</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#0ea5e9;">✓</span> 4가지 TTS 엔진 지원</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#0ea5e9;">✓</span> 씬별 자막 자동 분할</li>
+        <li style="padding:9px 0; font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#0ea5e9;">✓</span> 유튜브 자동 업로드</li>
+      </ul>
+      <button class="btn-primary" style="width:100%; border:none; cursor:pointer; font-size:15px; padding:14px; border-radius:12px; background:linear-gradient(135deg,#0ea5e9,#6366f1);">시작하기</button>
+    </div>
+
+    <!-- 번들 카드 (추천) -->
+    <div class="sub-card" style="flex:1; min-width:280px; max-width:340px; background:linear-gradient(160deg,#1a0f3a,#0f1a2e); border:1px solid rgba(167,139,250,0.5); border-radius:24px; padding:40px 32px; position:relative; display:flex; flex-direction:column; box-shadow:0 0 60px rgba(124,58,237,0.2);">
+      <div style="position:absolute; top:-14px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7c3aed,#2563eb); padding:5px 20px; border-radius:99px; font-size:12px; font-weight:700; white-space:nowrap;">🔥 가장 인기</div>
+      <div style="display:inline-block; padding:4px 14px; border-radius:99px; font-size:11px; font-weight:700; letter-spacing:1px; background:linear-gradient(135deg,#7c3aed,#2563eb); margin-bottom:20px; align-self:flex-start;">BUNDLE</div>
+      <div style="font-size:18px; font-weight:800; margin-bottom:6px;">NOBLE ARC 번들</div>
+      <div style="font-size:13px; color:#9ca3af; margin-bottom:28px;">쇼츠 + 롱폼 · 완전한 자동화</div>
+      <div style="margin-bottom:6px;">
+        <span style="font-size:13px; color:#6b7280; text-decoration:line-through;" id="b-orig"></span>
+        <span id="b-discount" style="font-size:12px; font-weight:700; color:#34d399; background:rgba(52,211,153,0.12); padding:2px 8px; border-radius:6px; margin-left:6px;"></span>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:6px; margin-bottom:8px;">
+        <span style="font-size:48px; font-weight:900; background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent; line-height:1;" id="b-price"></span>
+        <span style="font-size:14px; color:#9ca3af; margin-bottom:10px;">/월</span>
+      </div>
+      <div style="font-size:13px; color:#9ca3af; margin-bottom:32px;" id="b-total"></div>
+      <ul style="list-style:none; margin-bottom:32px; flex:1;">
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> Shorts 전체 기능 포함</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> Longform 전체 기능 포함</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 7개 언어 지원</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 정밀 자막 동기화</li>
+        <li style="padding:9px 0; font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 우선 이메일 지원</li>
+      </ul>
+      <button class="btn-primary" style="width:100%; border:none; cursor:pointer; font-size:15px; padding:14px; border-radius:12px;">시작하기</button>
+    </div>
+
+    <!-- 롱폼 카드 -->
+    <div class="sub-card" style="flex:1; min-width:280px; max-width:320px; background:var(--dark2); border:1px solid rgba(124,58,237,0.25); border-radius:24px; padding:40px 32px; position:relative; display:flex; flex-direction:column;">
+      <div style="display:inline-block; padding:4px 14px; border-radius:99px; font-size:11px; font-weight:700; letter-spacing:1px; background:linear-gradient(135deg,#7c3aed,#2563eb); margin-bottom:20px; align-self:flex-start;">LONGFORM</div>
+      <div style="font-size:18px; font-weight:800; margin-bottom:6px;">NOBLE ARC Longform</div>
+      <div style="font-size:13px; color:#6b7280; margin-bottom:28px;">롱폼 전용 · 20분+ 영상 자동화</div>
+      <div style="margin-bottom:6px;">
+        <span style="font-size:13px; color:#6b7280; text-decoration:line-through;" id="l-orig"></span>
+        <span id="l-discount" style="font-size:12px; font-weight:700; color:#34d399; background:rgba(52,211,153,0.12); padding:2px 8px; border-radius:6px; margin-left:6px;"></span>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:6px; margin-bottom:8px;">
+        <span style="font-size:48px; font-weight:900; background:linear-gradient(135deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent; line-height:1;" id="l-price"></span>
+        <span style="font-size:14px; color:#9ca3af; margin-bottom:10px;">/월</span>
+      </div>
+      <div style="font-size:13px; color:#6b7280; margin-bottom:32px;" id="l-total"></div>
+      <ul style="list-style:none; margin-bottom:32px; flex:1;">
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 롱폼 AI 대본 자동 생성</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 챕터별 씬 분할</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 7개 언어 지원</li>
+        <li style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 정밀 자막 동기화</li>
+        <li style="padding:9px 0; font-size:14px; display:flex; gap:10px; align-items:center;"><span style="color:#a78bfa;">✓</span> 유튜브 자동 업로드</li>
+      </ul>
+      <button class="btn-primary" style="width:100%; border:none; cursor:pointer; font-size:15px; padding:14px; border-radius:12px;">시작하기</button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.sub-tab {
+  padding: 9px 22px; border-radius: 10px; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 600; color: #9ca3af; background: transparent;
+  transition: all .2s;
+}
+.sub-tab.on {
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  color: #fff;
+}
+.sub-tab:hover:not(.on) { color: #fff; }
+</style>
+
+<script>
+const SUB_DATA = {
+  1:  { s:[22000,34000], l:[29000,42000], b:[45000,65000] },
+  3:  { s:[63000,102000], l:[84000,126000], b:[132000,195000] },
+  6:  { s:[120000,162000], l:[162000,252000], b:[258000,390000] },
+  12: { s:[228000,408000], l:[310000,504000], b:[500000,780000] }
+};
+function fmt(n){ return '₩'+n.toLocaleString('ko-KR'); }
+function subTab(el) {
+  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  const p = +el.dataset.p;
+  const d = SUB_DATA[p];
+  const perMonth = (v,m) => Math.round(v/m);
+  const disc = (orig,actual) => Math.round((1-actual/orig)*100)+'% 할인';
+  // 쇼츠
+  const sm = perMonth(d.s[0], p);
+  document.getElementById('s-price').textContent = fmt(sm);
+  document.getElementById('s-orig').textContent = fmt(34000)+'/월';
+  document.getElementById('s-discount').textContent = disc(34000, sm);
+  document.getElementById('s-total').textContent = p===1 ? '월 단위 결제' : `${p}개월 ${fmt(d.s[0])} 일괄 결제`;
+  // 롱폼
+  const lm = perMonth(d.l[0], p);
+  document.getElementById('l-price').textContent = fmt(lm);
+  document.getElementById('l-orig').textContent = fmt(42000)+'/월';
+  document.getElementById('l-discount').textContent = disc(42000, lm);
+  document.getElementById('l-total').textContent = p===1 ? '월 단위 결제' : `${p}개월 ${fmt(d.l[0])} 일괄 결제`;
+  // 번들
+  const bm = perMonth(d.b[0], p);
+  document.getElementById('b-price').textContent = fmt(bm);
+  document.getElementById('b-orig').textContent = fmt(65000)+'/월';
+  document.getElementById('b-discount').textContent = disc(65000, bm);
+  document.getElementById('b-total').textContent = p===1 ? '월 단위 결제' : `${p}개월 ${fmt(d.b[0])} 일괄 결제`;
+}
+// 초기 로딩
+document.addEventListener('DOMContentLoaded', ()=>{ subTab(document.querySelector('.sub-tab.on')); });
+</script>
+
 <!-- PRICING -->
 <section class="section" id="pricing">
   <div class="section-label" style="text-align:center;">가격</div>
