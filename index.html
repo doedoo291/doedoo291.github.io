@@ -225,19 +225,6 @@ nav{
 .pricing-btn.secondary:hover{background:var(--bg4);transform:translateY(-1px);}
 .pricing-note{text-align:center;font-size:13px;color:var(--muted);margin-top:24px;}
 
-/* lifetime */
-.lifetime-wrap{
-  background:#fff;border-radius:20px;border:1.5px solid var(--border);
-  padding:52px 48px;margin-top:20px;
-  display:flex;align-items:center;justify-content:space-between;gap:32px;
-  box-shadow:var(--shadow);
-}
-.lifetime-tag{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--cy);background:rgba(8,145,178,0.08);padding:4px 14px;border-radius:99px;display:inline-block;margin-bottom:14px;}
-.lifetime-left h3{font-size:26px;font-weight:900;margin-bottom:8px;color:var(--wd);}
-.lifetime-left p{font-size:14px;color:var(--muted);max-width:380px;line-height:1.6;}
-.lifetime-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex-shrink:0;}
-.lifetime-price{font-size:40px;font-weight:900;color:var(--ac);}
-.lifetime-right .pricing-btn{width:auto;padding:14px 32px;white-space:nowrap;}
 
 /* ── FEATURES ── */
 .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px;margin-top:56px;}
@@ -269,6 +256,47 @@ nav{
 .faq-item.open .faq-q::after{transform:rotate(45deg);}
 .faq-a{font-size:14px;color:var(--muted);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;}
 .faq-item.open .faq-a{max-height:200px;padding-bottom:20px;}
+
+/* ── BOARD ── */
+.board-tabs{display:flex;gap:8px;margin-bottom:0;}
+.board-tab{padding:10px 28px;border-radius:10px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border:1.5px solid var(--border);background:#fff;transition:all .2s;}
+.board-tab.on{background:linear-gradient(135deg,var(--ac),#2563eb);color:#fff;border-color:transparent;box-shadow:0 2px 12px rgba(109,40,217,0.3);}
+.board-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.board-write-btn{padding:9px 20px;background:var(--ac);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
+.board-list{border:1.5px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;}
+.board-item{display:grid;grid-template-columns:1fr auto;align-items:center;padding:18px 24px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.board-item:last-child{border-bottom:none;}
+.board-item:hover{background:var(--bg2);}
+.board-item-title{font-size:15px;font-weight:600;color:var(--wd);margin-bottom:4px;}
+.board-item-meta{font-size:12px;color:var(--muted2);}
+.board-item-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;}
+.badge-review{background:rgba(109,40,217,0.08);color:var(--ac);}
+.badge-answered{background:rgba(34,197,94,0.1);color:#16a34a;}
+.badge-waiting{background:rgba(245,158,11,0.1);color:#d97706;}
+.board-empty{padding:48px;text-align:center;color:var(--muted2);font-size:14px;}
+.board-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;}
+.board-modal{background:#fff;border-radius:20px;padding:40px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto;}
+.board-modal h3{font-size:20px;font-weight:800;margin-bottom:24px;color:var(--wd);}
+.board-modal-type{display:flex;gap:8px;margin-bottom:16px;}
+.board-type-btn{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;background:#fff;transition:all .2s;}
+.board-type-btn.on{border-color:var(--ac);color:var(--ac);background:rgba(109,40,217,0.04);}
+.board-modal input,.board-modal textarea{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;outline:none;margin-bottom:12px;box-sizing:border-box;}
+.board-modal input:focus,.board-modal textarea:focus{border-color:var(--ac);}
+.board-modal textarea{min-height:140px;resize:vertical;}
+.board-modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px;}
+.btn-board-cancel{padding:10px 20px;background:var(--bg3);color:var(--muted);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
+.btn-board-submit{padding:10px 24px;background:linear-gradient(135deg,var(--ac),#2563eb);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;}
+.post-author{font-size:13px;color:var(--muted);margin-bottom:20px;}
+.post-content{font-size:15px;line-height:1.8;color:var(--wd);white-space:pre-wrap;padding:20px;background:var(--bg2);border-radius:12px;margin-bottom:24px;}
+.replies-section h4{font-size:12px;font-weight:700;color:var(--muted2);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.reply-item{padding:14px 16px;background:var(--bg2);border-radius:10px;margin-bottom:8px;}
+.reply-meta{font-size:11px;color:var(--muted2);margin-bottom:6px;}
+.reply-admin-badge{font-size:10px;font-weight:700;color:var(--ac);background:rgba(109,40,217,0.08);padding:2px 8px;border-radius:99px;margin-left:6px;}
+.reply-content{font-size:14px;color:var(--wd);line-height:1.6;}
+.reply-input-wrap{display:flex;gap:8px;margin-top:12px;}
+.reply-input-wrap input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;outline:none;font-family:inherit;}
+.reply-input-wrap input:focus{border-color:var(--ac);}
+.btn-reply{padding:10px 16px;background:var(--ac);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
 
 /* ── CTA BAND ── */
 .cta-band{
@@ -338,6 +366,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
 .license-meta{font-size:11px;color:var(--muted);margin-top:4px;}
 .license-empty{font-size:13px;color:var(--muted2);}
 .btn-logout{width:100%;padding:10px;background:var(--bg3);color:var(--muted);border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;}
+.btn-reset-machine{margin-top:6px;padding:4px 10px;background:#fee2e2;color:#dc2626;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;}
+.btn-reset-machine:hover{background:#fecaca;}
 .btn-logout:hover{background:var(--bg4);}
 
 /* 결제 모달 */
@@ -354,8 +384,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
   .steps{grid-template-columns:repeat(2,1fr);gap:32px;}
   .steps::before{display:none;}
   .pricing-grid{grid-template-columns:1fr;}
-  .lifetime-wrap{flex-direction:column;align-items:flex-start;}
-  .lifetime-right{align-items:flex-start;}
+
   footer{padding:48px 24px 32px;}
   .footer-top{flex-direction:column;}
   .footer-links{flex-direction:column;gap:32px;}
@@ -377,6 +406,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
     <a href="#usage">프로그램 사용법</a>
     <a href="#subscription">요금제</a>
     <a href="#faq">FAQ</a>
+    <a href="#community">커뮤니티</a>
   </div>
   <div class="nav-right">
     <div class="nav-user" id="navUser">
@@ -467,7 +497,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       <div class="pricing-original" id="l-orig">₩42,000/월</div>
       <div class="pricing-discount" id="l-discount"></div>
       <div class="pricing-billing" id="l-total">월 단위 결제</div>
-      <button class="pricing-btn primary" onclick="openBuyModal('shorts')">롱폼 시작하기</button>
+      <button class="pricing-btn primary" onclick="openBuyModal('longform')">롱폼 시작하기</button>
     </div>
     <div class="pricing-card">
       <div class="pricing-badge">BUNDLE</div>
@@ -480,21 +510,10 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       <div class="pricing-original" id="b-orig">₩65,000/월</div>
       <div class="pricing-discount" id="b-discount"></div>
       <div class="pricing-billing" id="b-total">월 단위 결제</div>
-      <button class="pricing-btn secondary" onclick="openBuyModal('shorts')">번들 시작하기</button>
+      <button class="pricing-btn secondary" onclick="openBuyModal('bundle')">번들 시작하기</button>
     </div>
   </div>
   <p class="pricing-note reveal">결제 후 즉시 라이선스 발급 · 이용 기간 종료 후 재결제 방식</p>
-  <div class="lifetime-wrap reveal">
-    <div class="lifetime-left">
-      <div class="lifetime-tag">LIFETIME</div>
-      <h3>한 번 구매, 평생 사용</h3>
-      <p>한 번 결제로 평생 사용 가능합니다. 이후 업데이트도 무료 제공됩니다.</p>
-    </div>
-    <div class="lifetime-right">
-      <div class="lifetime-price">₩990,000</div>
-      <button class="pricing-btn primary" onclick="openBuyModal('shorts')">영구 라이선스 구매</button>
-    </div>
-  </div>
 </section>
 </div>
 
@@ -606,6 +625,63 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
     </div>
   </div>
 </section>
+
+<!-- COMMUNITY -->
+<section class="sec" id="community" style="padding-top:80px;">
+  <div class="reveal" style="text-align:center;">
+    <div class="eyebrow">커뮤니티</div>
+    <h2 class="sec-title">사용자 게시판</h2>
+    <p class="sec-sub" style="margin:0 auto 44px;">실제 사용자들의 후기와 질문을 확인하세요.</p>
+  </div>
+  <div class="board-header reveal">
+    <div class="board-tabs">
+      <button class="board-tab on" onclick="switchBoardTab(this,'review')">사용후기</button>
+      <button class="board-tab" onclick="switchBoardTab(this,'qna')">Q&amp;A</button>
+    </div>
+    <button class="board-write-btn" onclick="openWriteModal()">+ 글쓰기</button>
+  </div>
+  <div id="boardList" class="board-list reveal">
+    <div class="board-empty">불러오는 중...</div>
+  </div>
+</section>
+
+<!-- 글쓰기 모달 -->
+<div class="board-modal-overlay" id="writeModal" onclick="if(event.target===this)closeWriteModal()">
+  <div class="board-modal">
+    <h3>글쓰기</h3>
+    <div class="board-modal-type">
+      <button class="board-type-btn on" id="typeReview" onclick="selectPostType('review')">사용후기</button>
+      <button class="board-type-btn" id="typeQna" onclick="selectPostType('qna')">Q&amp;A</button>
+    </div>
+    <input id="writeTitle" type="text" placeholder="제목을 입력하세요" maxlength="100" />
+    <textarea id="writeContent" placeholder="내용을 입력하세요"></textarea>
+    <div class="board-modal-actions">
+      <button class="btn-board-cancel" onclick="closeWriteModal()">취소</button>
+      <button class="btn-board-submit" onclick="submitPost()">등록</button>
+    </div>
+    <p id="writeMsg" style="font-size:12px;color:#ef4444;margin-top:8px;text-align:right;min-height:18px;"></p>
+  </div>
+</div>
+
+<!-- 게시글 상세 모달 -->
+<div class="board-modal-overlay" id="postModal" onclick="if(event.target===this)closePostModal()">
+  <div class="board-modal">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+      <h3 id="postTitle" style="margin-bottom:0;flex:1;padding-right:16px;"></h3>
+      <button onclick="closePostModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);flex-shrink:0;">✕</button>
+    </div>
+    <div class="post-author" id="postAuthor"></div>
+    <div class="post-content" id="postContent"></div>
+    <div class="replies-section">
+      <h4>댓글</h4>
+      <div id="repliesList"></div>
+      <div class="reply-input-wrap" id="replyInputWrap">
+        <input id="replyInput" type="text" placeholder="댓글을 입력하세요" maxlength="500" onkeydown="if(event.key==='Enter')submitReply()" />
+        <button class="btn-reply" onclick="submitReply()">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- CTA -->
 <div class="cta-band">
@@ -831,17 +907,22 @@ async function loadMyLicenses(email) {
   const container = document.getElementById('mypageLicenses');
   container.innerHTML = '<div class="license-empty">불러오는 중...</div>';
   try {
-    const collections = ['shorts_licenses'];
+    const colLabels = { shorts_licenses:'SHORTS', longform_licenses:'LONGFORM', bundle_licenses:'BUNDLE' };
     let html = '';
-    for (const col of collections) {
+    for (const [col, label] of Object.entries(colLabels)) {
       const snap = await db.collection(col).where('buyerEmail','==',email).get();
       snap.forEach(doc => {
         const d = doc.data();
-        const label = col === 'shorts_licenses' ? 'SHORTS' : 'LONGFORM';
-        const date  = d.activatedAt ? new Date(d.activatedAt).toLocaleDateString('ko-KR') : '';
+        const date    = d.activatedAt ? new Date(d.activatedAt).toLocaleDateString('ko-KR') : '';
+        const typeTxt = d.type === 'lifetime' ? '영구' : (d.months ? `${d.months}개월 구독` : '구독');
+        const expTxt  = d.expiresAt ? ` · ${new Date(d.expiresAt).toLocaleDateString('ko-KR')} 만료` : '';
+        const machineBtn = d.machineId
+          ? `<button class="btn-reset-machine" onclick="resetMachineId('${col}','${doc.id}')">기기 초기화</button>`
+          : '';
         html += `<div class="license-item">
           <div class="license-key">${doc.id}</div>
-          <div class="license-meta">${label} · ${d.type === 'lifetime' ? '영구' : '구독'} · ${date}</div>
+          <div class="license-meta">${label} · ${typeTxt}${expTxt} · ${date}</div>
+          ${machineBtn}
         </div>`;
       });
     }
@@ -849,6 +930,18 @@ async function loadMyLicenses(email) {
   } catch(e) {
     container.innerHTML = '<div class="license-empty">불러오기 실패</div>';
   }
+}
+async function resetMachineId(collection, licKey) {
+  if (!confirm('이 라이선스의 기기 바인딩을 초기화하시겠습니까?\n초기화 후 다른 PC에서 활성화할 수 있습니다.')) return;
+  const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/${collection}/${licKey}?key=${FB_API_KEY}&updateMask.fieldPaths=machineId`;
+  try {
+    const res = await fetch(url, {
+      method:'PATCH', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({fields:{ machineId:{nullValue:null} }})
+    });
+    if (res.ok) { alert('기기 초기화 완료. 이제 새 PC에서 활성화할 수 있습니다.'); loadMyLicenses(auth.currentUser.email); }
+    else { alert('초기화 실패. 다시 시도해주세요.'); }
+  } catch(e) { alert('오류: '+e.message); }
 }
 
 // ── 구독 요금제 ─────────────────────────────────────────
@@ -903,10 +996,22 @@ const STORE_ID    = 'store-2e5479e3-45ff-4aaa-9f57-8cf9dcec241c';
 const CHANNEL_KEY = 'channel-key-696a6114-0c77-49ec-a1cf-73c128cbab19';
 const FB_PROJECT  = 'noblearc-70d64';
 const FB_API_KEY  = 'AIzaSyBm3pfOFb6Dx2PhdxaO-0pzd1hW5NDEnFI';
-const PRODUCTS = {
-  shorts: { name:'NOBLE ARC Shorts 영구 라이선스', amount:990000, collection:'shorts_licenses' }
-};
 let currentProduct = 'shorts';
+
+function getProductInfo(product) {
+  const months = +document.querySelector('.sub-tab.on')?.dataset.p || 1;
+  const d = SUB_DATA[months];
+  const nameMap   = { shorts:'쇼츠', longform:'롱폼', bundle:'쇼츠+롱폼' };
+  const colMap    = { shorts:'shorts_licenses', longform:'longform_licenses', bundle:'bundle_licenses' };
+  const amountMap = { shorts:d.s[0], longform:d.l[0], bundle:d.b[0] };
+  return {
+    name: `NOBLE ARC ${nameMap[product]} ${months}개월`,
+    amount: amountMap[product],
+    collection: colMap[product],
+    type: 'subscription',
+    months
+  };
+}
 
 function openBuyModal(product) {
   if (!auth || !auth.currentUser) {
@@ -915,8 +1020,8 @@ function openBuyModal(product) {
     return;
   }
   currentProduct = product;
-  const p = PRODUCTS[product];
-  document.getElementById('modalTitle').textContent = p.name.replace(' 영구 라이선스','') + ' 구매';
+  const p = getProductInfo(product);
+  document.getElementById('modalTitle').textContent = p.name + ' 구매';
   document.getElementById('buyerEmail').value = auth.currentUser.email || '';
   document.getElementById('buyerPhone').value = '';
   document.getElementById('modalMsg').textContent = '';
@@ -932,14 +1037,22 @@ function genLicenseKey() {
   const seg = () => Array.from({length:4},()=>chars[Math.floor(Math.random()*chars.length)]).join('');
   return `NARC-${seg()}-${seg()}-${seg()}`;
 }
-async function saveToFirebase(collection, licKey, email, paymentId) {
+async function saveToFirebase(collection, licKey, email, paymentId, type, months) {
   const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/${collection}/${licKey}?key=${FB_API_KEY}`;
+  const now = new Date();
+  const fields = {
+    active:{booleanValue:true}, activatedAt:{timestampValue:now.toISOString()},
+    buyerEmail:{stringValue:email}, type:{stringValue:type}, paymentId:{stringValue:paymentId}
+  };
+  if (type === 'subscription' && months) {
+    const exp = new Date(now);
+    exp.setMonth(exp.getMonth() + months);
+    fields.expiresAt = {timestampValue:exp.toISOString()};
+    fields.months = {integerValue:months};
+  }
   const res = await fetch(url, {
     method:'PATCH', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({fields:{
-      active:{booleanValue:true}, activatedAt:{timestampValue:new Date().toISOString()},
-      buyerEmail:{stringValue:email}, type:{stringValue:'lifetime'}, paymentId:{stringValue:paymentId}
-    }})
+    body: JSON.stringify({fields})
   });
   if (!res.ok) throw new Error('Firebase 저장 실패: '+res.status);
 }
@@ -948,7 +1061,7 @@ async function startPayment() {
   const phone = document.getElementById('buyerPhone').value.trim().replace(/-/g,'');
   if (!email||!email.includes('@')) { document.getElementById('modalMsg').textContent='올바른 이메일을 입력해주세요.'; return; }
   if (!phone||phone.length<10) { document.getElementById('modalMsg').textContent='휴대폰 번호를 입력해주세요.'; return; }
-  const p = PRODUCTS[currentProduct];
+  const p = getProductInfo(currentProduct);
   const payBtn = document.getElementById('payBtn');
   payBtn.disabled=true; payBtn.textContent='결제창 열는 중...';
   document.getElementById('modalMsg').textContent='';
@@ -965,7 +1078,7 @@ async function startPayment() {
     }
     payBtn.textContent='라이선스 발급 중...';
     const licKey = genLicenseKey();
-    await saveToFirebase(p.collection, licKey, email, paymentId);
+    await saveToFirebase(p.collection, licKey, email, paymentId, p.type, p.months);
     closeBuyModal();
     document.getElementById('licenseKey').textContent=licKey;
     document.getElementById('licenseModal').style.display='flex';
@@ -980,8 +1093,173 @@ function copyLicense() {
     setTimeout(()=>{ document.getElementById('copyBtn').textContent='라이선스 키 복사'; },2000);
   });
 }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeBuyModal();closeLicenseModal();closeAuthModal();} });
-document.addEventListener('DOMContentLoaded', ()=>{ subTab(document.querySelector('.sub-tab.on')); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeBuyModal();closeLicenseModal();closeAuthModal();closeWriteModal();closePostModal();} });
+document.addEventListener('DOMContentLoaded', ()=>{
+  subTab(document.querySelector('.sub-tab.on'));
+  loadPosts('review');
+});
+
+// ── 게시판 ─────────────────────────────────────────────────────
+let currentBoardType = 'review';
+let currentPostId    = null;
+let writePostType    = 'review';
+
+function switchBoardTab(el, type) {
+  document.querySelectorAll('.board-tab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  currentBoardType = type;
+  loadPosts(type);
+}
+function selectPostType(type) {
+  writePostType = type;
+  document.getElementById('typeReview').classList.toggle('on', type === 'review');
+  document.getElementById('typeQna').classList.toggle('on', type === 'qna');
+}
+function openWriteModal() {
+  if (!auth || !auth.currentUser) {
+    openAuthModal();
+    document.getElementById('authMsg').textContent = '글쓰기는 로그인이 필요합니다.';
+    return;
+  }
+  document.getElementById('writeTitle').value = '';
+  document.getElementById('writeContent').value = '';
+  document.getElementById('writeMsg').textContent = '';
+  selectPostType('review');
+  document.getElementById('writeModal').style.display = 'flex';
+}
+function closeWriteModal() { document.getElementById('writeModal').style.display = 'none'; }
+function closePostModal()  { document.getElementById('postModal').style.display = 'none'; }
+
+async function submitPost() {
+  const title   = document.getElementById('writeTitle').value.trim();
+  const content = document.getElementById('writeContent').value.trim();
+  if (!title)   { document.getElementById('writeMsg').textContent = '제목을 입력해주세요.'; return; }
+  if (!content) { document.getElementById('writeMsg').textContent = '내용을 입력해주세요.'; return; }
+  const user = auth.currentUser;
+  if (!user) return;
+  const btn = document.querySelector('.btn-board-submit');
+  btn.disabled = true; btn.textContent = '등록 중...';
+  try {
+    await db.collection('posts').add({
+      type: writePostType, title, content,
+      authorEmail: user.email,
+      authorName: user.email.split('@')[0],
+      uid: user.uid,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      views: 0, replyCount: 0
+    });
+    closeWriteModal();
+    loadPosts(currentBoardType);
+  } catch(e) {
+    document.getElementById('writeMsg').textContent = '오류: ' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = '등록';
+  }
+}
+
+async function loadPosts(type) {
+  const container = document.getElementById('boardList');
+  container.innerHTML = '<div class="board-empty">불러오는 중...</div>';
+  try {
+    const snap = await db.collection('posts')
+      .where('type', '==', type)
+      .orderBy('createdAt', 'desc')
+      .limit(20).get();
+    if (snap.empty) {
+      container.innerHTML = '<div class="board-empty">아직 게시글이 없습니다. 첫 번째 글을 작성해보세요!</div>';
+      return;
+    }
+    let html = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const date = d.createdAt ? new Date(d.createdAt.toDate()).toLocaleDateString('ko-KR') : '';
+      const badge = type === 'review'
+        ? `<span class="board-item-badge badge-review">후기</span>`
+        : (d.replyCount > 0
+          ? `<span class="board-item-badge badge-answered">답변완료</span>`
+          : `<span class="board-item-badge badge-waiting">답변대기</span>`);
+      html += `<div class="board-item" onclick="openPost('${doc.id}')">
+        <div>
+          <div class="board-item-title">${d.title}</div>
+          <div class="board-item-meta">${d.authorName} · ${date}${d.views ? ' · 조회 ' + d.views : ''}</div>
+        </div>
+        ${badge}
+      </div>`;
+    });
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = `<div class="board-empty">불러오기 실패 — <a href="https://console.firebase.google.com" target="_blank" style="color:var(--ac);">Firestore 색인 설정</a>이 필요할 수 있습니다.</div>`;
+  }
+}
+
+async function openPost(id) {
+  currentPostId = id;
+  const doc = await db.collection('posts').doc(id).get();
+  if (!doc.exists) return;
+  const d = doc.data();
+  const date = d.createdAt ? new Date(d.createdAt.toDate()).toLocaleDateString('ko-KR') : '';
+  document.getElementById('postTitle').textContent   = d.title;
+  document.getElementById('postAuthor').textContent  = `${d.authorName} · ${date}`;
+  document.getElementById('postContent').textContent = d.content;
+  document.getElementById('replyInputWrap').style.display = auth.currentUser ? 'flex' : 'none';
+  document.getElementById('replyInput').value = '';
+  document.getElementById('postModal').style.display = 'flex';
+  db.collection('posts').doc(id).update({ views: firebase.firestore.FieldValue.increment(1) }).catch(()=>{});
+  loadReplies(id);
+}
+
+async function loadReplies(postId) {
+  const container = document.getElementById('repliesList');
+  try {
+    const snap = await db.collection('posts').doc(postId).collection('replies')
+      .orderBy('createdAt', 'asc').get();
+    if (snap.empty) {
+      container.innerHTML = '<div style="font-size:13px;color:var(--muted2);padding:8px 0;">아직 댓글이 없습니다.</div>';
+      return;
+    }
+    let html = '';
+    snap.forEach(doc => {
+      const d = doc.data();
+      const date = d.createdAt ? new Date(d.createdAt.toDate()).toLocaleDateString('ko-KR') : '';
+      const adminBadge = d.isAdmin ? '<span class="reply-admin-badge">관리자</span>' : '';
+      html += `<div class="reply-item">
+        <div class="reply-meta">${d.authorName}${adminBadge} · ${date}</div>
+        <div class="reply-content">${d.content}</div>
+      </div>`;
+    });
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<div style="font-size:13px;color:#ef4444;">불러오기 실패</div>';
+  }
+}
+
+async function submitReply() {
+  const input = document.getElementById('replyInput');
+  const content = input.value.trim();
+  if (!content || !currentPostId || !auth.currentUser) return;
+  const user = auth.currentUser;
+  input.disabled = true;
+  try {
+    await db.collection('posts').doc(currentPostId).collection('replies').add({
+      content,
+      authorEmail: user.email,
+      authorName: user.email.split('@')[0],
+      uid: user.uid,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      isAdmin: false
+    });
+    await db.collection('posts').doc(currentPostId).update({
+      replyCount: firebase.firestore.FieldValue.increment(1)
+    });
+    input.value = '';
+    loadReplies(currentPostId);
+    loadPosts(currentBoardType);
+  } catch(e) {
+    alert('오류: ' + e.message);
+  } finally {
+    input.disabled = false;
+  }
+}
 </script>
 </body>
 </html>
