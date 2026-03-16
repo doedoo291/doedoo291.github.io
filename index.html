@@ -303,7 +303,7 @@ nav{
   background:linear-gradient(135deg,var(--ac) 0%,#2563eb 60%,var(--cy) 100%);
   padding:100px 24px;text-align:center;position:relative;overflow:hidden;
 }
-.cta-band::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.07) 1.5px,transparent 1.5px);background-size:28px 28px;}
+.cta-band::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.07) 1.5px,transparent 1.5px);background-size:28px 28px;pointer-events:none;}
 .cta-band h2{font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-1px;margin-bottom:16px;color:#fff;position:relative;}
 .cta-band p{font-size:18px;color:rgba(255,255,255,0.8);margin-bottom:40px;position:relative;}
 .btn-white{padding:16px 52px;background:#fff;color:var(--ac);font-size:16px;font-weight:800;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.15);transition:transform .15s,box-shadow .2s;}
@@ -709,7 +709,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
         <a href="#" onclick="openAuthModal('login')">로그인</a>
         <a href="#" onclick="openAuthModal('signup')">회원가입</a>
         <a href="#faq">FAQ</a>
-        <a href="mailto:doedoo291@gmail.com">이메일 문의</a>
+        <a href="https://mail.google.com/mail/?view=cm&to=doedoo291@gmail.com" target="_blank">이메일 문의</a>
       </div>
     </div>
   </div>
