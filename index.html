@@ -467,16 +467,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
 <section class="sec">
   <div class="reveal" style="text-align:center;">
     <div class="eyebrow">이용 요금</div>
-    <h2 class="sec-title">이용 기간이 길수록<br>더 큰 할인 혜택</h2>
-    <p class="sec-sub" style="margin:0 auto 44px;">기간을 미리 선결제할수록 월 단가가 낮아집니다. 부담 없이 시작하세요.</p>
-  </div>
-  <div class="sub-tabs-wrap reveal">
-    <div class="sub-tabs">
-      <button class="sub-tab on" data-p="1" onclick="subTab(this)">1개월</button>
-      <button class="sub-tab" data-p="3" onclick="subTab(this)">3개월</button>
-      <button class="sub-tab" data-p="6" onclick="subTab(this)">6개월</button>
-      <button class="sub-tab" data-p="12" onclick="subTab(this)">1년 <span style="font-size:10px;color:#d97706;font-weight:700;">BEST</span></button>
-    </div>
+    <h2 class="sec-title">합리적인 가격으로<br>시작하세요</h2>
+    <p class="sec-sub" style="margin:0 auto 44px;">월 단위로 결제하고, 언제든 자유롭게 이용하세요.</p>
   </div>
   <div class="pricing-grid reveal">
     <div class="pricing-card">
@@ -484,12 +476,10 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       <div class="pricing-name">쇼츠 전용</div>
       <div class="pricing-desc">쇼츠 채널에 최적화된 자동화 솔루션</div>
       <div class="pricing-price-row">
-        <div class="pricing-price" id="s-price">₩22,000</div>
+        <div class="pricing-price">₩22,000</div>
         <div class="pricing-unit">/월</div>
       </div>
-      <div class="pricing-original" id="s-orig">₩34,000/월</div>
-      <div class="pricing-discount" id="s-discount"></div>
-      <div class="pricing-billing" id="s-total">월 단위 결제</div>
+      <div class="pricing-billing">월 단위 결제</div>
       <button class="pricing-btn secondary" onclick="openBuyModal('shorts')">쇼츠 시작하기</button>
     </div>
     <div class="pricing-card highlight">
@@ -497,12 +487,10 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       <div class="pricing-name">롱폼 전용</div>
       <div class="pricing-desc">롱폼 채널에 최적화된 고급 자동화 솔루션</div>
       <div class="pricing-price-row">
-        <div class="pricing-price" id="l-price">₩29,000</div>
+        <div class="pricing-price">₩29,000</div>
         <div class="pricing-unit">/월</div>
       </div>
-      <div class="pricing-original" id="l-orig">₩42,000/월</div>
-      <div class="pricing-discount" id="l-discount"></div>
-      <div class="pricing-billing" id="l-total">월 단위 결제</div>
+      <div class="pricing-billing">월 단위 결제</div>
       <button class="pricing-btn primary" onclick="openBuyModal('longform')">롱폼 시작하기</button>
     </div>
     <div class="pricing-card">
@@ -510,12 +498,10 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       <div class="pricing-name">쇼츠 + 롱폼</div>
       <div class="pricing-desc">쇼츠+롱폼 동시 운영하는 가장 스마트한 선택</div>
       <div class="pricing-price-row">
-        <div class="pricing-price" id="b-price">₩45,000</div>
+        <div class="pricing-price">₩45,000</div>
         <div class="pricing-unit">/월</div>
       </div>
-      <div class="pricing-original" id="b-orig">₩65,000/월</div>
-      <div class="pricing-discount" id="b-discount"></div>
-      <div class="pricing-billing" id="b-total">월 단위 결제</div>
+      <div class="pricing-billing">월 단위 결제</div>
       <button class="pricing-btn secondary" onclick="openBuyModal('bundle')">번들 시작하기</button>
     </div>
   </div>
@@ -958,36 +944,7 @@ async function resetMachineId(collection, licKey) {
 }
 
 // ── 구독 요금제 ─────────────────────────────────────────
-const SUB_DATA = {
-  1:  { s:[22000,34000], l:[29000,42000], b:[45000,65000] },
-  3:  { s:[63000,102000], l:[84000,126000], b:[132000,195000] },
-  6:  { s:[120000,162000], l:[162000,252000], b:[258000,390000] },
-  12: { s:[228000,408000], l:[310000,504000], b:[500000,780000] }
-};
-function fmt(n){ return '₩'+n.toLocaleString('ko-KR'); }
-function subTab(el) {
-  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  const p = +el.dataset.p;
-  const d = SUB_DATA[p];
-  const pm  = (v,m)=>Math.round(v/m);
-  const dc  = (orig,act)=>Math.round((1-act/orig)*100)+'% 할인';
-  const sm=pm(d.s[0],p);
-  document.getElementById('s-price').textContent=fmt(sm);
-  document.getElementById('s-orig').textContent=fmt(34000)+'/월';
-  document.getElementById('s-discount').textContent=p>1?dc(34000,sm):'';
-  document.getElementById('s-total').textContent=p===1?'월 단위 결제':`${p}개월 ${fmt(d.s[0])} 일괄 결제`;
-  const lm=pm(d.l[0],p);
-  document.getElementById('l-price').textContent=fmt(lm);
-  document.getElementById('l-orig').textContent=fmt(42000)+'/월';
-  document.getElementById('l-discount').textContent=p>1?dc(42000,lm):'';
-  document.getElementById('l-total').textContent=p===1?'월 단위 결제':`${p}개월 ${fmt(d.l[0])} 일괄 결제`;
-  const bm=pm(d.b[0],p);
-  document.getElementById('b-price').textContent=fmt(bm);
-  document.getElementById('b-orig').textContent=fmt(65000)+'/월';
-  document.getElementById('b-discount').textContent=p>1?dc(65000,bm):'';
-  document.getElementById('b-total').textContent=p===1?'월 단위 결제':`${p}개월 ${fmt(d.b[0])} 일괄 결제`;
-}
+const PRICES = { shorts:22000, longform:29000, bundle:45000 };
 
 // ── FAQ ───────────────────────────────────────────
 function toggleFaq(el) {
@@ -1012,17 +969,14 @@ const FB_API_KEY  = 'AIzaSyBm3pfOFb6Dx2PhdxaO-0pzd1hW5NDEnFI';
 let currentProduct = 'shorts';
 
 function getProductInfo(product) {
-  const months = +document.querySelector('.sub-tab.on')?.dataset.p || 1;
-  const d = SUB_DATA[months];
-  const nameMap   = { shorts:'쇼츠', longform:'롱폼', bundle:'쇼츠+롱폼' };
-  const colMap    = { shorts:'shorts_licenses', longform:'longform_licenses', bundle:'bundle_licenses' };
-  const amountMap = { shorts:d.s[0], longform:d.l[0], bundle:d.b[0] };
+  const nameMap = { shorts:'쇼츠', longform:'롱폼', bundle:'쇼츠+롱폼' };
+  const colMap  = { shorts:'shorts_licenses', longform:'longform_licenses', bundle:'bundle_licenses' };
   return {
-    name: `NOBLE ARC ${nameMap[product]} ${months}개월`,
-    amount: amountMap[product],
+    name: `NOBLE ARC ${nameMap[product]} 1개월`,
+    amount: PRICES[product],
     collection: colMap[product],
     type: 'subscription',
-    months
+    months: 1
   };
 }
 
@@ -1108,7 +1062,6 @@ function copyLicense() {
 }
 document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeBuyModal();closeLicenseModal();closeAuthModal();closeWriteModal();closePostModal();} });
 document.addEventListener('DOMContentLoaded', ()=>{
-  subTab(document.querySelector('.sub-tab.on'));
   loadPosts('review');
 });
 
