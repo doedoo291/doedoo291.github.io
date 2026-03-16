@@ -8,7 +8,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-storage-compat.js"></script>
 <meta name="description" content="NOBLE ARC는 AI 기반 유튜브 롱폼/숏폼 콘텐츠 자동화 솔루션입니다.">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -1175,16 +1174,24 @@ async function submitPost() {
   const btn = document.querySelector('.btn-board-submit');
   btn.disabled = true; btn.textContent = '등록 중...';
   try {
-    // 이미지 업로드 (있는 경우)
+    // 이미지 업로드 (ImgBB)
     let imageUrl = null;
     const fileInput = document.getElementById('writeImageInput');
     if (fileInput.files[0]) {
       btn.textContent = '이미지 업로드 중...';
-      const file = fileInput.files[0];
-      const storage = firebase.storage();
-      const ref = storage.ref(`posts/${user.uid}/${Date.now()}_${file.name}`);
-      await ref.put(file);
-      imageUrl = await ref.getDownloadURL();
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(fileInput.files[0]);
+      });
+      const form = new FormData();
+      form.append('key', 'b94a83807b9dc227adfebbadccb4bc05');
+      form.append('image', base64);
+      const imgRes = await fetch('https://api.imgbb.com/1/upload', { method:'POST', body:form });
+      const imgData = await imgRes.json();
+      if (!imgData.success) throw new Error('이미지 업로드 실패');
+      imageUrl = imgData.data.url;
     }
     await db.collection('posts').add({
       type: writePostType, title, content,
