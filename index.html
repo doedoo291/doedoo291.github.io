@@ -228,6 +228,8 @@ nav{
 .pay-type-btn{padding:10px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;white-space:nowrap;}
 .pay-type-btn.on{background:var(--ac);color:#fff;box-shadow:0 2px 12px rgba(109,40,217,0.3);}
 .pay-type-save{display:inline-block;margin-left:8px;background:#059669;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;vertical-align:middle;}
+.sub-notice-banner{display:none;background:#fffbeb;border:1.5px solid #f59e0b;border-radius:12px;padding:14px 20px;margin-bottom:24px;font-size:13px;color:#92400e;text-align:center;line-height:1.6;}
+.sub-notice-banner strong{color:#b45309;}
 
 
 /* ── FEATURES ── */
@@ -477,6 +479,9 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
   <div class="pay-type-toggle reveal" id="payTypeToggle">
     <button class="pay-type-btn on" id="btnSingle" onclick="setPayType('single')">단건 결제</button>
     <button class="pay-type-btn" id="btnSub" onclick="setPayType('sub')">정기구독 <span class="pay-type-save">월 2,000원 절약</span></button>
+  </div>
+  <div class="sub-notice-banner" id="subNoticeBanner">
+    ⚙️ <strong>정기구독 시스템 구축 중입니다.</strong> 현재는 단건 결제로만 이용 가능합니다.<br>정기구독 오픈 시 기존 회원분들께 별도 안내드릴 예정입니다.
   </div>
   <div class="pricing-grid reveal">
     <div class="pricing-card" data-prod="shorts">
@@ -984,11 +989,9 @@ const PRICES_ORIG = { shorts:34000, longform:42000, bundle:65000 };
 let currentPayType = 'single';
 
 function setPayType(type) {
-  if (type === 'sub') {
-    alert('정기구독 시스템은 현재 구축 중입니다.\n월 단위 단건 결제로 이용해 주세요.');
-    return;
-  }
   currentPayType = type;
+  const banner = document.getElementById('subNoticeBanner');
+  if (banner) banner.style.display = type === 'sub' ? 'block' : 'none';
   document.getElementById('btnSingle').classList.toggle('on', type==='single');
   document.getElementById('btnSub').classList.toggle('on', type==='sub');
   const prices = type==='single' ? PRICES : PRICES_SUB;
@@ -1048,6 +1051,10 @@ function getProductInfo(product, paytype) {
 }
 
 function openBuyModal(product) {
+  if (currentPayType === 'sub') {
+    alert('정기구독 시스템은 현재 구축 중입니다.\n단건 결제 탭으로 이용해 주세요.');
+    return;
+  }
   if (!auth || !auth.currentUser) {
     openAuthModal();
     document.getElementById('authMsg').textContent = '결제하려면 먼저 로그인해주세요.';
