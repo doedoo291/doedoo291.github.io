@@ -224,6 +224,10 @@ nav{
 .pricing-btn.secondary{background:var(--bg3);color:var(--ac);border:1.5px solid var(--border-ac);}
 .pricing-btn.secondary:hover{background:var(--bg4);transform:translateY(-1px);}
 .pricing-note{text-align:center;font-size:13px;color:var(--muted);margin-top:24px;}
+.pay-type-toggle{display:flex;background:var(--bg3);border-radius:12px;padding:4px;width:fit-content;margin:0 auto 40px;border:1.5px solid var(--border-ac);}
+.pay-type-btn{padding:10px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;white-space:nowrap;}
+.pay-type-btn.on{background:var(--ac);color:#fff;box-shadow:0 2px 12px rgba(109,40,217,0.3);}
+.pay-type-save{display:inline-block;margin-left:8px;background:#059669;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;vertical-align:middle;}
 
 
 /* ── FEATURES ── */
@@ -468,10 +472,14 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
   <div class="reveal" style="text-align:center;">
     <div class="eyebrow">이용 요금</div>
     <h2 class="sec-title">합리적인 가격으로<br>시작하세요</h2>
-    <p class="sec-sub" style="margin:0 auto 44px;">월 단위로 결제하고, 언제든 자유롭게 이용하세요.</p>
+    <p class="sec-sub" style="margin:0 auto 32px;">단건 결제 또는 월 자동 정기구독 중 원하는 방식으로 시작하세요.</p>
+  </div>
+  <div class="pay-type-toggle reveal" id="payTypeToggle">
+    <button class="pay-type-btn on" id="btnSingle" onclick="setPayType('single')">단건 결제</button>
+    <button class="pay-type-btn" id="btnSub" onclick="setPayType('sub')">정기구독 <span class="pay-type-save">월 2,000원 절약</span></button>
   </div>
   <div class="pricing-grid reveal">
-    <div class="pricing-card">
+    <div class="pricing-card" data-prod="shorts">
       <div class="pricing-badge">SHORTS</div>
       <div class="pricing-name">쇼츠 전용</div>
       <div class="pricing-desc">쇼츠 채널에 최적화된 자동화 솔루션</div>
@@ -481,10 +489,10 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       </div>
       <div class="pricing-original">₩34,000/월</div>
       <div class="pricing-discount">35% 할인</div>
-      <div class="pricing-billing">월 단위 결제</div>
+      <div class="pricing-billing">월 단위 결제 · 수동 갱신</div>
       <button class="pricing-btn secondary" onclick="openBuyModal('shorts')">쇼츠 시작하기</button>
     </div>
-    <div class="pricing-card highlight">
+    <div class="pricing-card highlight" data-prod="longform">
       <div class="pricing-badge">LONGFORM</div>
       <div class="pricing-name">롱폼 전용</div>
       <div class="pricing-desc">롱폼 채널에 최적화된 고급 자동화 솔루션</div>
@@ -494,10 +502,10 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       </div>
       <div class="pricing-original">₩42,000/월</div>
       <div class="pricing-discount">31% 할인</div>
-      <div class="pricing-billing">월 단위 결제</div>
+      <div class="pricing-billing">월 단위 결제 · 수동 갱신</div>
       <button class="pricing-btn primary" onclick="openBuyModal('longform')">롱폼 시작하기</button>
     </div>
-    <div class="pricing-card">
+    <div class="pricing-card" data-prod="bundle">
       <div class="pricing-badge">BUNDLE</div>
       <div class="pricing-name">쇼츠 + 롱폼</div>
       <div class="pricing-desc">쇼츠+롱폼 동시 운영하는 가장 스마트한 선택</div>
@@ -507,11 +515,11 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
       </div>
       <div class="pricing-original">₩65,000/월</div>
       <div class="pricing-discount">31% 할인</div>
-      <div class="pricing-billing">월 단위 결제</div>
+      <div class="pricing-billing">월 단위 결제 · 수동 갱신</div>
       <button class="pricing-btn secondary" onclick="openBuyModal('bundle')">번들 시작하기</button>
     </div>
   </div>
-  <p class="pricing-note reveal">결제 후 즉시 라이선스 발급 · 이용 기간 종료 후 재결제 방식</p>
+  <p class="pricing-note reveal" id="priceNote">결제 후 즉시 라이선스 발급 · 이용 기간 종료 후 재결제 방식</p>
 </section>
 </div>
 
@@ -607,7 +615,9 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">이용 기간이 끝나면 어떻게 되나요?</div>
-      <div class="faq-a">이용 기간이 만료되면 프로그램 사용이 중단됩니다. 재결제하면 즉시 다시 이용 가능합니다. 정기 자동 결제는 없으며, 필요할 때 직접 결제하는 방식입니다. 다양한 기간별 결제가 가능합니다.</div>
+      <div class="faq-a">이용 기간이 만료되면 프로그램 사용이 중단됩니다.<br><br>
+      <strong>단건 결제</strong>의 경우 이용 기간 종료 후 직접 재결제하면 즉시 다시 이용 가능합니다.<br><br>
+      <strong>정기구독</strong>의 경우 매월 자동으로 결제되어 이용 기간이 연장됩니다. 언제든 마이페이지에서 구독을 해지할 수 있으며, 해지 후에는 남은 이용 기간까지만 사용 가능합니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Windows 외 Mac, Linux도 지원하나요?</div>
@@ -623,15 +633,20 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">환불은 어떻게 하면 되나요?</div>
-      <div class="faq-a">환불을 원하시면 이메일(doedoo291@gmail.com) 또는 전화(010-4241-9745)로 문의해 주세요. 라이선스 키를 아직 활성화하지 않으셨다면 구매일로부터 7일 이내에 전액 환불이 가능합니다. 단, 라이선스 키를 프로그램에 입력하여 활성화한 경우에는 디지털 콘텐츠의 특성상 환불이 어렵습니다(전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항 준용).</div>
+      <div class="faq-a">환불을 원하시면 이메일(doedoo291@gmail.com) 또는 전화(010-4241-9745)로 문의해 주세요.<br><br>
+      <strong>[단건 결제 환불]</strong><br>
+      라이선스 키를 아직 활성화하지 않으셨다면 구매일로부터 7일 이내에 전액 환불이 가능합니다. 단, 라이선스 키를 프로그램에 입력하여 활성화한 경우에는 디지털 콘텐츠의 특성상 환불이 어렵습니다(전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항 준용).<br><br>
+      <strong>[정기구독 환불]</strong><br>
+      정기구독은 언제든 해지 가능합니다. 해지 시 당월 남은 이용 기간은 계속 사용 가능하며, 다음 달부터 자동 청구가 중단됩니다. 이미 결제된 당월 금액의 환불은 라이선스 미활성화 상태에서 결제일로부터 7일 이내에 한해 요청 가능합니다. 활성화 후에는 디지털 콘텐츠 특성상 환불이 어렵습니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">프로그램에 오류가 있어서 사용을 못 했어요. 환불되나요?</div>
       <div class="faq-a">프로그램 자체의 결함이나 오류로 인해 정상적인 사용이 불가능했다고 판단되는 경우에는 개별 협의를 통해 환불 또는 이용 기간 연장 조치를 취해 드립니다. 이메일(doedoo291@gmail.com) 또는 전화(010-4241-9745)로 문의해 주시면 최대한 빠르게 확인 후 안내해 드리겠습니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">구독이 자동으로 결제되나요?</div>
-      <div class="faq-a">아니요, NOBLE ARC는 자동 정기결제(구독) 방식이 아닙니다. 1개월 단위의 수동 결제 방식으로 운영되며, 이용 기간이 만료되면 사용이 중단됩니다. 원하실 때 직접 재결제하는 방식이므로 원치 않는 자동 청구 걱정 없이 이용하실 수 있습니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">정기구독과 단건 결제의 차이는 무엇인가요?</div>
+      <div class="faq-a"><strong>단건 결제</strong>는 매월 직접 재결제하는 방식입니다. 이용 기간이 만료되면 사용이 중단되고, 원하실 때 직접 결제하면 됩니다. 자동 청구 걱정이 없습니다.<br><br>
+      <strong>정기구독</strong>은 매월 자동으로 결제되는 방식으로, 단건 결제 대비 월 2,000원 저렴합니다. 언제든 마이페이지에서 해지할 수 있으며, 해지 시 다음 달부터 자동 청구가 중단됩니다.</div>
     </div>
   </div>
 </section>
@@ -772,7 +787,7 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
 <div class="modal" id="buyModal">
   <div class="modal-box">
     <h3 id="modalTitle">구매하기</h3>
-    <p class="modal-sub">라이선스 키는 이메일로 발송됩니다.</p>
+    <p class="modal-sub" id="modalSub">라이선스 키는 이메일로 발송됩니다.</p>
     <label>이메일</label>
     <input type="email" id="buyerEmail" placeholder="email@example.com">
     <label>휴대폰 번호</label>
@@ -963,6 +978,36 @@ async function resetMachineId(collection, licKey) {
 
 // ── 구독 요금제 ─────────────────────────────────────────
 const PRICES = { shorts:22000, longform:29000, bundle:45000 };
+const PRICES_SUB = { shorts:20000, longform:27000, bundle:43000 };
+const PRICES_ORIG = { shorts:34000, longform:42000, bundle:65000 };
+
+let currentPayType = 'single';
+
+function setPayType(type) {
+  if (type === 'sub') {
+    alert('정기구독 시스템은 현재 구축 중입니다.\n월 단위 단건 결제로 이용해 주세요.');
+    return;
+  }
+  currentPayType = type;
+  document.getElementById('btnSingle').classList.toggle('on', type==='single');
+  document.getElementById('btnSub').classList.toggle('on', type==='sub');
+  const prices = type==='single' ? PRICES : PRICES_SUB;
+  const billing = type==='single' ? '월 단위 결제 · 수동 갱신' : '월 자동 결제 · 언제든 해지 가능';
+  ['shorts','longform','bundle'].forEach(p => {
+    const card = document.querySelector(`[data-prod="${p}"]`);
+    if (!card) return;
+    const amt = prices[p];
+    const orig = PRICES_ORIG[p];
+    const disc = Math.round((1 - amt/orig)*100);
+    card.querySelector('.pricing-price').textContent = '₩' + amt.toLocaleString();
+    card.querySelector('.pricing-discount').textContent = disc + '% 할인';
+    card.querySelector('.pricing-billing').textContent = billing;
+  });
+  const note = document.getElementById('priceNote');
+  if (note) note.textContent = type==='single'
+    ? '결제 후 즉시 라이선스 발급 · 이용 기간 종료 후 재결제 방식'
+    : '결제 후 즉시 라이선스 발급 · 매월 자동 갱신 · 언제든 마이페이지에서 해지 가능';
+}
 
 // ── FAQ ───────────────────────────────────────────
 function toggleFaq(el) {
@@ -986,15 +1031,19 @@ const FB_PROJECT  = 'noblearc-70d64';
 const FB_API_KEY  = 'AIzaSyBm3pfOFb6Dx2PhdxaO-0pzd1hW5NDEnFI';
 let currentProduct = 'shorts';
 
-function getProductInfo(product) {
+function getProductInfo(product, paytype) {
+  const pt = paytype || currentPayType || 'single';
   const nameMap = { shorts:'쇼츠', longform:'롱폼', bundle:'쇼츠+롱폼' };
   const colMap  = { shorts:'shorts_licenses', longform:'longform_licenses', bundle:'bundle_licenses' };
+  const isSub = pt === 'sub';
+  const prices = isSub ? PRICES_SUB : PRICES;
   return {
-    name: `NOBLE ARC ${nameMap[product]} 1개월`,
-    amount: PRICES[product],
+    name: `NOBLE ARC ${nameMap[product]} ${isSub ? '정기구독' : '1개월'}`,
+    amount: prices[product],
     collection: colMap[product],
-    type: 'subscription',
-    months: 1
+    type: isSub ? 'recurring' : 'subscription',
+    months: 1,
+    isSub
   };
 }
 
@@ -1006,12 +1055,16 @@ function openBuyModal(product) {
   }
   currentProduct = product;
   const p = getProductInfo(product);
+  const subLabel = p.isSub ? ' (정기구독 · 매월 자동결제)' : ' (단건 결제)';
   document.getElementById('modalTitle').textContent = p.name + ' 구매';
+  document.getElementById('modalSub').textContent = p.isSub
+    ? '매월 자동으로 결제됩니다. 언제든 마이페이지에서 해지 가능합니다.'
+    : '라이선스 키는 이메일로 발송됩니다.';
   document.getElementById('buyerEmail').value = auth.currentUser.email || '';
   document.getElementById('buyerPhone').value = '';
   document.getElementById('modalMsg').textContent = '';
   document.getElementById('payBtn').disabled = false;
-  document.getElementById('payBtn').textContent = '결제하기 (₩' + p.amount.toLocaleString() + ')';
+  document.getElementById('payBtn').textContent = '결제하기 (₩' + p.amount.toLocaleString() + '/월' + (p.isSub ? ' · 자동결제' : '') + ')';
   document.getElementById('buyModal').style.display = 'flex';
 }
 function closeBuyModal() { document.getElementById('buyModal').style.display = 'none'; }
@@ -1059,7 +1112,7 @@ async function startPayment() {
     });
     if (result&&result.code!==undefined) {
       document.getElementById('modalMsg').textContent=result.message||'결제가 취소되었습니다.';
-      payBtn.disabled=false; payBtn.textContent='결제하기 (₩'+p.amount.toLocaleString()+')'; return;
+      payBtn.disabled=false; payBtn.textContent='결제하기 (₩'+p.amount.toLocaleString()+'/월'+(p.isSub?' · 자동결제':'')+')'; return;
     }
     payBtn.textContent='라이선스 발급 중...';
     const licKey = genLicenseKey();
