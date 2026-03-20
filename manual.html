@@ -6,33 +6,33 @@
 <title>NOBLE ARC 프로그램 사용설명서</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#0d0f18;color:#e0e0e0;display:flex;min-height:100vh;font-size:16px}
+body{font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;background:#0f1117;color:#ddd;display:flex;min-height:100vh}
 
-#toc{position:fixed;top:0;left:0;width:280px;height:100vh;background:#111420;border-right:1px solid #252838;overflow-y:auto;z-index:100;padding-bottom:40px}
-#toc-header{padding:24px 20px 16px;border-bottom:1px solid #252838}
+#toc{position:fixed;top:0;left:0;width:270px;height:100vh;background:#13151f;border-right:1px solid #1e2130;overflow-y:auto;z-index:100;padding-bottom:40px}
+#toc-header{padding:24px 20px 16px;border-bottom:1px solid #1e2130}
 #toc-header .logo{font-size:12px;color:#00d2d3;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-#toc-header h1{font-size:15px;color:#f0f0f0;line-height:1.4;font-weight:600}
-#toc ul{list-style:none;padding:14px 0}
-#toc li a{display:block;padding:10px 20px;font-size:14px;color:#d0d0d0;text-decoration:none;border-left:3px solid transparent;transition:all .15s;line-height:1.6;font-weight:500}
-#toc li.sub a{padding:8px 20px 8px 36px;font-size:13px;color:#aaa;font-weight:400}
-#toc li a:hover{color:#00d2d3;background:rgba(0,210,211,.08);border-left-color:#00d2d3}
-#toc li.sub a:hover{color:#00d2d3;background:rgba(0,210,211,.06);border-left-color:#00d2d3}
-.toc-active{color:#00d2d3 !important;background:rgba(0,210,211,.12) !important;border-left-color:#00d2d3 !important}
+#toc-header h1{font-size:14px;color:#eee;line-height:1.4}
+#toc ul{list-style:none;padding:12px 0}
+#toc li a{display:block;padding:9px 20px;font-size:13px;color:#aaa;text-decoration:none;border-left:3px solid transparent;transition:all .15s;line-height:1.4}
+#toc li.sub a{padding:7px 20px 7px 36px;font-size:12px;color:#777}
+#toc li a:hover{color:#00d2d3;background:rgba(0,210,211,.07);border-left-color:#00d2d3}
+#toc li.sub a:hover{color:#00d2d3;background:rgba(0,210,211,.05);border-left-color:#00d2d3}
+.toc-active{color:#00d2d3 !important;background:rgba(0,210,211,.1) !important;border-left-color:#00d2d3 !important}
 
-#content{margin-left:280px;padding:56px 64px;max-width:1020px;width:100%}
-#main-title{font-size:28px;font-weight:700;color:#00d2d3;margin-bottom:10px}
-#main-sub{font-size:14px;color:#666;margin-bottom:52px;padding-bottom:28px;border-bottom:1px solid #252838}
+#content{margin-left:270px;padding:48px 56px;max-width:1000px;width:100%}
+#main-title{font-size:26px;font-weight:700;color:#00d2d3;margin-bottom:8px}
+#main-sub{font-size:13px;color:#555;margin-bottom:48px;padding-bottom:24px;border-bottom:1px solid #1e2130}
 
-h2{font-size:20px;font-weight:700;color:#ffffff;margin:64px 0 24px;padding:18px 22px;background:#181b2a;border-left:4px solid #00d2d3;border-radius:0 10px 10px 0;letter-spacing:.3px}
-h3{font-size:16px;font-weight:700;color:#4de8e8;margin:40px 0 16px;padding:12px 18px;background:rgba(0,210,211,.07);border-left:3px solid rgba(0,210,211,.5);border-radius:0 8px 8px 0}
+h2{font-size:19px;font-weight:700;color:#fff;margin:56px 0 20px;padding:16px 20px;background:#1a1d2a;border-left:4px solid #00d2d3;border-radius:0 8px 8px 0}
+h3{font-size:15px;font-weight:700;color:#00d2d3;margin:36px 0 14px;padding:10px 16px;background:rgba(0,210,211,.06);border-left:3px solid rgba(0,210,211,.4);border-radius:0 6px 6px 0}
 
-p{font-size:15.5px;line-height:2;color:#d4d4d4;margin-bottom:14px;padding:0 4px;word-break:keep-all}
-.img-wrap{margin:24px 0;border-radius:12px;overflow:hidden;border:1px solid #252838;background:#090b12;box-shadow:0 4px 24px rgba(0,0,0,.4)}
+p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
+.img-wrap{margin:20px 0;border-radius:10px;overflow:hidden;border:1px solid #1e2130;background:#0a0c14}
 .img-wrap img{width:100%;display:block}
 
 #toc::-webkit-scrollbar{width:4px}
 #toc::-webkit-scrollbar-thumb{background:#2a2d3a;border-radius:2px}
-@media(max-width:768px){#toc{display:none}#content{margin-left:0;padding:28px 20px}}
+@media(max-width:768px){#toc{display:none}#content{margin-left:0;padding:24px 20px}}
 </style>
 </head>
 <body>
@@ -47,6 +47,7 @@ p{font-size:15.5px;line-height:2;color:#d4d4d4;margin-bottom:14px;padding:0 4px;
     <li><a href="#sec-3프로그램-설치">3.프로그램 설치</a></li>
     <li><a href="#sec-4API키-관리-탭-설정">4.API키 관리 탭 설정</a></li>
     <li class="sub"><a href="#sec-41-vertex-json-발급-및-등록-방법필수">4-1 vertex json 발급 및 등록 방법(필수)</a></li>
+    <li class="sub sub2"><a href="#sec-41-extra-vertex-quota">4-1 추가정보. Vertex AI 이미지 한도 상향 (선택)</a></li>
     <li class="sub"><a href="#sec-42-GROQ-API키-발급받기필수">4-2 GROQ API키 발급받기(필수)</a></li>
     <li class="sub"><a href="#sec-43-OPENAI-API키-발급받기선택">4-3 OPENAI API키 발급받기(선택)</a></li>
     <li class="sub"><a href="#sec-44-MINIMAX-API키-발급받기선택">4-4 MINIMAX API키 발급받기(선택)</a></li>
@@ -194,6 +195,19 @@ p{font-size:15.5px;line-height:2;color:#d4d4d4;margin-bottom:14px;padding:0 4px;
 <p>IAM 및 관리자 → 서비스 계정</p>
 <p>서비스 계정 만들기 → 키 추가 → 새 키 만들기</p>
 <p>JSON → 만들기 → 다운로드 완료!</p>
+<h3 id="sec-41-extra-vertex-quota" style="margin-top:2.5rem;">4-1 추가정보. Vertex AI 이미지 생성 한도 상향 <span style="font-size:0.75em;color:#a78bfa;font-weight:600;background:rgba(167,139,250,0.12);padding:2px 10px;border-radius:20px;vertical-align:middle;">선택사항</span></h3>
+<p>이미지 생성 시 "분당 횟수 초과" 오류가 자주 발생한다면 GCP 콘솔에서 한도를 상향 요청할 수 있습니다. <strong>무료로 신청 가능</strong>하며 보통 수 분 내 자동 승인됩니다. 오류가 없다면 건너뛰셔도 됩니다.</p>
+<p><strong>① GCP 콘솔 검색창에 <code>quotas</code> 입력 후 "할당량 및 시스템 한도" 클릭</strong><br>목록에서 아래 항목을 찾아 선택합니다.</p>
+<p style="background:#1e293b;border-left:3px solid #a78bfa;padding:10px 16px;border-radius:6px;font-family:monospace;font-size:13px;">Vertex AI API → Regional online prediction requests per base model per minute per region per base_model<br><span style="color:#94a3b8;">region: us-central1 / base_model: imagen-3.0-generate</span></p>
+<div class="img-wrap"><img src="imgs/quota_step1.png" loading="lazy" alt="GCP 할당량 검색 화면"></div>
+<p><strong>② 해당 항목 오른쪽 끝 점 3개(⋮) 클릭 → "할당량 수정" 선택</strong></p>
+<div class="img-wrap"><img src="imgs/quota_step2.png" loading="lazy" alt="할당량 수정 메뉴"></div>
+<p><strong>③ 새 값 입력(예: 7) 및 간단한 요청 설명 입력 후 "다음" 클릭</strong><br>요청 설명 예시: <em>이미지 사용량이 많아 추가 요청 드립니다.</em></p>
+<div class="img-wrap"><img src="imgs/quota_step3.png" loading="lazy" alt="할당량 수정 수량 입력"></div>
+<p><strong>④ 연락처(전화번호) 입력 후 "요청 제출" 클릭 — 완료!</strong></p>
+<div class="img-wrap"><img src="imgs/quota_step4.png" loading="lazy" alt="요청 제출 화면"></div>
+<p style="color:#94a3b8;font-size:14px;">※ 승인 후 바로 적용되며 별도 재설정 없이 이미지 생성이 원활해집니다.</p>
+
 <h3 id="sec-42-GROQ-API키-발급받기필수">4-2 GROQ API키 발급받기(필수)</h3>
 <p>GROQ API는 자막을 잘 분할하고 씽크를 맞춰주는 서비스로 필수 API키입니다 가입과  API발급이 매우 간단하고 하루 120분 분량의 무료 사용량이 있어 마음놓고 이용하실 수 있습니다. 하지만 이 API키가 없더라도 프로그램 자체적으로 자막 분할과 씽크를 맞추는 프로그램이 내장되어 있어 120분을 모두 사용하신 경우라도 걱정없이 영상을 생성하실 수 있습니다. 그럼 지금부터 GROQ API키 발급 받는 방법을 알려드리겠습니다.</p>
 <p>https://console.groq.com/home</p>
