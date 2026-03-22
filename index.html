@@ -224,6 +224,11 @@ nav{
 .pricing-btn.secondary{background:var(--bg3);color:var(--ac);border:1.5px solid var(--border-ac);}
 .pricing-btn.secondary:hover{background:var(--bg4);transform:translateY(-1px);}
 .pricing-note{text-align:center;font-size:13px;color:var(--muted);margin-top:24px;}
+.trial-banner{background:linear-gradient(135deg,#059669,#047857);color:#fff;text-align:center;padding:24px 32px;border-radius:16px;margin-top:28px;}
+.trial-banner h3{font-size:17px;font-weight:800;margin-bottom:6px;}
+.trial-banner p{font-size:13px;opacity:0.88;margin-bottom:16px;}
+.trial-btn{background:#fff;color:#047857;font-size:14px;font-weight:700;padding:10px 28px;border:none;border-radius:8px;cursor:pointer;transition:opacity .15s;}
+.trial-btn:hover{opacity:0.88;}
 .pay-type-toggle{display:flex;background:var(--bg3);border-radius:12px;padding:4px;width:fit-content;margin:0 auto 40px;border:1.5px solid var(--border-ac);}
 .pay-type-btn{padding:10px 28px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;white-space:nowrap;}
 .pay-type-btn.on{background:var(--ac);color:#fff;box-shadow:0 2px 12px rgba(109,40,217,0.3);}
@@ -525,6 +530,11 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
     </div>
   </div>
   <p class="pricing-note reveal" id="priceNote">결제 후 즉시 라이선스 발급 · 이용 기간 종료 후 재결제 방식</p>
+  <div class="trial-banner reveal">
+    <h3>2일 무료체험 — 쇼츠+롱폼 번들 전체 이용</h3>
+    <p>결제 없이 2일간 모든 기능을 직접 체험해보세요. 1기기 1회 한정.</p>
+    <button class="trial-btn" onclick="openTrialModal()">무료체험 신청하기</button>
+  </div>
 </section>
 </div>
 
@@ -779,6 +789,21 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
 </div>
 
 <!-- BUY MODAL -->
+<!-- TRIAL MODAL -->
+<div class="modal" id="trialModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeTrialModal()">&#x2715;</button>
+    <div class="modal-title">2일 무료체험 신청</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">쇼츠+롱폼 번들 전체 이용 · 1기기 1회 한정</p>
+    <div class="form-group">
+      <label class="form-label">이메일</label>
+      <input class="form-input" type="email" id="trialEmail" placeholder="your@email.com" />
+    </div>
+    <p class="modal-msg" id="trialMsg"></p>
+    <button class="btn-pay" id="trialBtn" onclick="requestTrial()">무료체험 키 발급받기</button>
+  </div>
+</div>
+
 <div class="modal" id="buyModal">
   <div class="modal-box">
     <h3 id="modalTitle">구매하기</h3>
@@ -1022,6 +1047,63 @@ const observer = new IntersectionObserver(entries=>{
 },{ threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+// ── 무료체험 시스템 ─────────────────────────────────
+function openTrialModal() {
+  if (!auth || !auth.currentUser) {
+    openAuthModal();
+    document.getElementById('authMsg').textContent = '무료체험 신청은 로그인이 필요합니다.';
+    return;
+  }
+  document.getElementById('trialEmail').value = auth.currentUser.email || '';
+  document.getElementById('trialMsg').textContent = '';
+  document.getElementById('trialBtn').disabled = false;
+  document.getElementById('trialBtn').textContent = '무료체험 키 발급받기';
+  document.getElementById('trialModal').style.display = 'flex';
+}
+function closeTrialModal() { document.getElementById('trialModal').style.display = 'none'; }
+
+async function requestTrial() {
+  const email = document.getElementById('trialEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('trialMsg').textContent = '올바른 이메일을 입력해주세요.';
+    return;
+  }
+  const btn = document.getElementById('trialBtn');
+  btn.disabled = true; btn.textContent = '확인 중...';
+  document.getElementById('trialMsg').textContent = '';
+  try {
+    // 이 이메일로 이미 체험한 적 있는지 확인
+    const snap = await db.collection('trial_licenses').where('buyerEmail', '==', email).get();
+    if (!snap.empty) {
+      document.getElementById('trialMsg').textContent = '이미 무료체험을 사용한 이메일입니다.';
+      btn.disabled = false; btn.textContent = '무료체험 키 발급받기';
+      return;
+    }
+    const trialKey = genLicenseKey();
+    const now = new Date();
+    const exp = new Date(now); exp.setDate(exp.getDate() + 2);
+    const url = `https://firestore.googleapis.com/v1/projects/${FB_PROJECT}/databases/(default)/documents/trial_licenses/${trialKey}?key=${FB_API_KEY}`;
+    const res = await fetch(url, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fields: {
+        active:      { booleanValue: true },
+        activatedAt: { timestampValue: now.toISOString() },
+        expiresAt:   { timestampValue: exp.toISOString() },
+        buyerEmail:  { stringValue: email },
+        type:        { stringValue: 'trial' },
+        machineId:   { stringValue: '' }
+      }})
+    });
+    if (!res.ok) throw new Error('발급 실패: ' + res.status);
+    closeTrialModal();
+    document.getElementById('licenseKey').textContent = trialKey;
+    document.getElementById('licenseModal').style.display = 'flex';
+  } catch(e) {
+    document.getElementById('trialMsg').textContent = '오류: ' + e.message;
+    btn.disabled = false; btn.textContent = '무료체험 키 발급받기';
+  }
+}
+
 // ── 결제 시스템 ────────────────────────────────────
 const STORE_ID    = 'store-2e5479e3-45ff-4aaa-9f57-8cf9dcec241c';
 const CHANNEL_KEY = 'channel-key-fbe62bf2-c5da-45a5-866f-89e8f7ca8bf5';
@@ -1133,7 +1215,7 @@ function copyLicense() {
     setTimeout(()=>{ document.getElementById('copyBtn').textContent='라이선스 키 복사'; },2000);
   });
 }
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeBuyModal();closeLicenseModal();closeAuthModal();closeWriteModal();closePostModal();} });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){closeBuyModal();closeLicenseModal();closeAuthModal();closeWriteModal();closePostModal();closeTrialModal();} });
 document.addEventListener('DOMContentLoaded', ()=>{
   loadPosts('review');
 });
