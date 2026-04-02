@@ -170,30 +170,16 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>아래 사항은 해당되시는분들만 참고하세요</p>
 <div class="img-wrap"><img src="imgs/image36.png" loading="lazy" alt="스크린샷"></div>
 <p>만약 이런 화면이 뜨는 분들이 계신다면 아래 설명대로 한번 해보세요</p>
-<p>조직 정책 차단 시 해결 방법 (Cloud Shell 사용)</p>
-<p>1단계: Cloud Shell 열기</p>
-<p>오류 창 닫기</p>
-<p>우측 상단 Cloud Shell 활성화 버튼 클릭 (터미널 아이콘 &gt;_)</p>
-<p>하단에 창이 뜨면 승인 클릭</p>
-<p>2단계: 명령어 입력</p>
-<p>아래 명령어를 복사해서 붙여넣기 후 엔터:</p>
-<p style="background:#1a1d2a;border-radius:6px;padding:10px 14px;font-family:monospace;font-size:13px;color:#a5f3fc;">gcloud projects create 원하는이름 --no-enable-cloud-apis</p>
-<p>이름 예시: <code style="background:#1a1d2a;padding:2px 8px;border-radius:4px;font-size:13px;color:#a5f3fc;">gcloud projects create seoul-0319 --no-enable-cloud-apis</code></p>
-<p>이름이 이미 존재한다고 뜨면 뒤에 숫자 바꿔서 다시 시도</p>
-<p>3단계: 완료 확인</p>
-<p>터미널에 아래 문구가 보이면 성공:</p>
-<p style="background:#1a1d2a;border-radius:6px;padding:10px 14px;font-family:monospace;font-size:13px;color:#86efac;">...finish. Done</p>
-<p>4단계: 새 프로젝트로 전환</p>
-<p>상단 프로젝트 드롭다운 클릭</p>
-<p>조직 없음 클릭</p>
-<p>방금 만든 프로젝트 선택</p>
-<p>5단계: JSON 키 다시 생성</p>
-<p>IAM 및 관리자 → 서비스 계정</p>
-<p>서비스 계정 만들기 → 키 추가 → 새 키 만들기</p>
-<p>JSON → 만들기 → 다운로드 완료!</p>
+<p>조직 정책 차단 시 해결 방법</p>
+<p>우측 상단 프로젝트 선택 드롭다운을 클릭한 후, 오른쪽에 있는 <strong>"새 프로젝트"</strong> 버튼을 클릭합니다.</p>
+<div class="img-wrap"><img src="imgs/new_project_click.png" loading="lazy" alt="새 프로젝트 클릭 화면"></div>
+<p>프로젝트 이름을 자유롭게 입력하고, 조직은 <strong>"조직 없음"</strong>으로 설정한 후 <strong>"만들기"</strong>를 클릭합니다.</p>
+<div class="img-wrap"><img src="imgs/new_project_create.png" loading="lazy" alt="새 프로젝트 생성 화면"></div>
+<p>만들어진 새프로젝트 선택하신 후 다시 JSON발급받기를 아래와 같이 어어가시면 됩니다.</p>
 <h3 id="sec-41-extra-vertex-quota" style="margin-top:2.5rem;">4-1 추가정보. Vertex AI 이미지 생성 한도 상향 <span style="font-size:0.75em;color:#a78bfa;font-weight:600;background:rgba(167,139,250,0.12);padding:2px 10px;border-radius:20px;vertical-align:middle;">선택사항</span></h3>
-<p>이미지 생성 시 "분당 횟수 초과" 오류가 자주 발생한다면 GCP 콘솔에서 한도를 상향 요청할 수 있습니다. <strong>무료로 신청 가능</strong>하며 보통 수 분 내 자동 승인됩니다. 오류가 없다면 건너뛰셔도 됩니다.</p>
-<p><strong>① GCP 콘솔 검색창에 <code>quotas</code> 입력 후 "할당량 및 시스템 한도" 클릭</strong><br>목록에서 아래 항목을 찾아 선택합니다.</p>
+<div class="img-wrap"><img src="imgs/quota_iam_nav.png" loading="lazy" alt="GCP IAM 및 관리자 → 할당량 및 시스템 한도 이동 화면"></div>
+<p>이 이미지 생성 한도 횟수를 증대 시킬수 있습니다. 이것을 해놓으시면 이미지 생성 속도가 빨라집니다. <strong>무료로 신청이 가능합니다.</strong> 보통 수분내 자동 승인됩니다. 속도 상관없으시다면 건너 뛰셔도 됩니다.</p>
+<p><strong>① GCP 콘솔 좌측 메뉴에서 "IAM 및 관리자" 클릭 → 하위 메뉴에서 "할당량 및 시스템 한도" 클릭</strong><br>목록에서 아래 항목을 찾아 선택합니다.</p>
 <p style="background:#1e293b;border-left:3px solid #a78bfa;padding:10px 16px;border-radius:6px;font-family:monospace;font-size:13px;">Vertex AI API → Regional online prediction requests per base model per minute per region per base_model<br><span style="color:#94a3b8;">region: us-central1 / base_model: imagen-3.0-generate</span></p>
 <div class="img-wrap"><img src="imgs/quota_step1.png" loading="lazy" alt="GCP 할당량 검색 화면"></div>
 <p><strong>② 해당 항목 오른쪽 끝 점 3개(⋮) 클릭 → "할당량 수정" 선택</strong></p>
