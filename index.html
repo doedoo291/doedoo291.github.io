@@ -819,6 +819,8 @@ footer{background:#fff;border-top:1px solid var(--border);padding:60px 60px 40px
   <div class="modal-box">
     <h3 id="modalTitle">구매하기</h3>
     <p class="modal-sub" id="modalSub">라이선스 키는 이메일로 발송됩니다.</p>
+    <label>이름</label>
+    <input type="text" id="buyerName" placeholder="홍길동">
     <label>이메일</label>
     <input type="email" id="buyerEmail" placeholder="email@example.com">
     <label>휴대폰 번호</label>
@@ -1163,6 +1165,7 @@ function openBuyModal(product) {
   document.getElementById('modalSub').textContent = p.isSub
     ? '매월 자동으로 결제됩니다. 언제든 마이페이지에서 해지 가능합니다.'
     : '라이선스 키는 이메일로 발송됩니다.';
+  document.getElementById('buyerName').value = '';
   document.getElementById('buyerEmail').value = auth.currentUser.email || '';
   document.getElementById('buyerPhone').value = '';
   document.getElementById('modalMsg').textContent = '';
@@ -1198,8 +1201,10 @@ async function saveToFirebase(collection, licKey, email, paymentId, type, months
   if (!res.ok) throw new Error('Firebase 저장 실패: '+res.status);
 }
 async function startPayment() {
+  const name  = document.getElementById('buyerName').value.trim();
   const email = document.getElementById('buyerEmail').value.trim();
   const phone = document.getElementById('buyerPhone').value.trim().replace(/-/g,'');
+  if (!name||name.length<2) { document.getElementById('modalMsg').textContent='이름을 입력해주세요. (2자 이상)'; return; }
   if (!email||!email.includes('@')) { document.getElementById('modalMsg').textContent='올바른 이메일을 입력해주세요.'; return; }
   if (!phone||phone.length<10) { document.getElementById('modalMsg').textContent='휴대폰 번호를 입력해주세요.'; return; }
   const p = getProductInfo(currentProduct);
@@ -1211,7 +1216,7 @@ async function startPayment() {
     const result = await PortOne.requestPayment({
       storeId:STORE_ID, channelKey:CHANNEL_KEY, paymentId, orderName:p.name,
       totalAmount:p.amount, currency:'KRW', payMethod:'CARD',
-      customer:{email, fullName:'구매자', phoneNumber:phone}
+      customer:{email, fullName:name, phoneNumber:phone}
     });
     if (result&&result.code!==undefined) {
       document.getElementById('modalMsg').textContent=result.message||'결제가 취소되었습니다.';
