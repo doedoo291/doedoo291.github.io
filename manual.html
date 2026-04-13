@@ -187,9 +187,15 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <h3 id="sec-41-extra-vertex-quota" style="margin-top:2.5rem;">4-1 추가정보. Vertex AI 이미지 생성 한도 상향 <span style="font-size:0.75em;color:#a78bfa;font-weight:600;background:rgba(167,139,250,0.12);padding:2px 10px;border-radius:20px;vertical-align:middle;">선택사항</span></h3>
 <div class="img-wrap"><img src="imgs/quota_iam_nav.png" loading="lazy" alt="GCP IAM 및 관리자 → 할당량 및 시스템 한도 이동 화면"></div>
 <p>이 이미지 생성 한도 횟수를 증대 시킬수 있습니다. 이것을 해놓으시면 이미지 생성 속도가 빨라집니다. <strong>무료로 신청이 가능합니다.</strong> 보통 수분내 자동 승인됩니다. 속도 상관없으시다면 건너 뛰셔도 됩니다.</p>
-<p><strong>① GCP 콘솔 좌측 메뉴에서 "IAM 및 관리자" 클릭 → 하위 메뉴에서 "할당량 및 시스템 한도" 클릭</strong><br>목록에서 아래 항목을 찾아 선택합니다.</p>
-<p style="background:#1e293b;border-left:3px solid #a78bfa;padding:10px 16px;border-radius:6px;font-family:monospace;font-size:13px;">Vertex AI API → Regional online prediction requests per base model per minute per region per base_model<br><span style="color:#94a3b8;">region: us-central1 / base_model: imagen-3.0-generate</span></p>
-<div class="img-wrap"><img src="imgs/quota_filter_list.png" loading="lazy" alt="GCP 할당량 목록 - Vertex AI API 항목 선택"></div>
+<p><strong>① GCP 콘솔 좌측 메뉴에서 "IAM 및 관리자" 클릭 → 하위 메뉴에서 "할당량 및 시스템 한도" 클릭</strong><br>
+할당량 및 시스템 한도 화면에서 필터 입력란에 아래 순서대로 입력하여 항목을 좁혀나갑니다.</p>
+<p style="background:#1e293b;border-left:3px solid #a78bfa;padding:10px 16px;border-radius:6px;font-family:monospace;font-size:13px;">
+필터 ① &nbsp;서비스 : <strong style="color:#c4b5fd;">Vertex AI API</strong><br>
+필터 ② &nbsp;<strong style="color:#c4b5fd;">Regional online prediction</strong><br>
+필터 ③ &nbsp;<strong style="color:#c4b5fd;">region:us-central1</strong>
+</p>
+<p>3가지 필터를 순서대로 입력하면 목록이 좁혀집니다. 필터링된 목록에서 측정기준(위치) 항목의 <strong>base_model 값이 정확히 <span style="color:#c4b5fd;">imagen-3.0-generate</span> 인 행</strong>을 찾아 선택해 주세요. 아래 스크린샷과 동일한 항목인지 반드시 확인하신 후 진행하세요.</p>
+<div class="img-wrap"><img src="imgs/quota_filter_new.png" loading="lazy" alt="GCP 할당량 필터 - imagen-3.0-generate 항목 선택"></div>
 <p><strong>② 해당 항목 오른쪽 끝 점 3개(⋮) 클릭 → "할당량 수정" 선택</strong></p>
 <div class="img-wrap"><img src="imgs/quota_step2.png" loading="lazy" alt="할당량 수정 메뉴"></div>
 <p><strong>③ 새 값 입력(예: 7) 및 간단한 요청 설명 입력 후 "다음" 클릭</strong><br>요청 설명 예시: <em>이미지 사용량이 많아 추가 요청 드립니다.</em></p>
@@ -331,6 +337,8 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>새 키 만들기 창이 뜨면 <strong>가져온 프로젝트 선택</strong> 드롭다운을 클릭하시고 목록에서 <strong>Gemini Project</strong>를 선택해 주세요. Gemini Project가 없으시면 프로젝트 만들기로 새로 생성하시면 됩니다.</p>
 <div class="img-wrap"><img src="imgs/gemini_step4.png" loading="lazy" alt="키 만들기 버튼 클릭"></div>
 <p>프로젝트 선택 후 하단의 <strong>키 만들기</strong> 버튼을 클릭하시면 API 키가 생성됩니다.</p>
+<p>⚠️ <strong>중요 — 결제 등급 설정 (반드시 완료하세요)</strong><br>
+키가 생성된 후 반드시 <strong>결제 등급</strong> 설정을 마무리하셔야 합니다. Google AI Studio에서 해당 키의 <strong>결제 등급</strong> 버튼을 클릭한 후 결제 계정을 연결하시면 키가 <strong>Tier 1 · 후불</strong> 등급으로 전환됩니다. 이 과정을 완료하지 않으면 무료 플랜(Tier 0)의 낮은 요청 한도가 적용되어 영상 생성 중 오류가 발생할 수 있습니다. 결제 계정 연결 후 Tier 1 · 후불로 전환되면 <strong>Google에서 제공하는 300달러 무료 크레딧</strong>이 적용되어 해당 크레딧 범위 내에서는 실제 비용이 청구되지 않습니다. 300달러 크레딧을 모두 소진한 이후부터 실제 비용이 청구되므로, 처음에는 사실상 무료로 이용하시면서 Tier 1의 높은 한도를 누리실 수 있습니다. 꼭 결제 등급 설정까지 완료하신 후 다음 단계로 진행해 주세요.</p>
 <div class="img-wrap"><img src="imgs/gemini_step5.png" loading="lazy" alt="복사 버튼 클릭"></div>
 <p>API 키가 생성되면 목록에서 해당 키 옆의 <strong>복사 버튼</strong>을 클릭하여 복사해 주세요.</p>
 <p>복사하신 API 키를 NOBLE ARC 프로그램의 <strong>API 키 관리</strong> 탭 → <strong>Gemini API</strong> 입력란에 붙여넣기 하신 후 저장 버튼을 누르시면 됩니다. 한번 저장해두시면 계속 보관되어 재입력하실 필요가 없습니다.</p>
@@ -377,12 +385,23 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>또한 <strong>직접입력</strong> 탭이 있습니다. 직접 작성한 대본이나 다른 곳에서 생성한 대본이 있다면 이곳에 붙여넣기 하여 AI 대본 생성 없이 바로 영상을 만들 수 있습니다.</p>
 <div class="img-wrap"><img src="imgs/image202.png" loading="lazy" alt="스크린샷"></div>
 <p>직접입력 탭을 선택하시면 대본을 직접 붙여넣을 수 있는 텍스트 입력창이 나타납니다. 대본을 입력하시면 하단에 글자수, 예상 씬 수, 권장 영상 길이가 자동으로 계산되어 표시됩니다. 입력 완료 후 딸깍 또는 단계별 생성 버튼을 누르면 AI 대본 생성 단계는 건너뛰고 이미지 생성·음성 더빙·자막·렌더링 과정이 자동으로 진행됩니다.</p>
+<h3>Google 검색 기반 대본 생성</h3>
+<p>키워드 생성, 벤치마킹 탭, 직접입력 탭 설명 아래쪽에 <strong>Google 검색 기반 대본 생성</strong> 체크박스가 있습니다. 이 기능은 대본을 생성할 때 Google 검색을 실시간으로 참고하여 최신 정보와 사실을 대본에 반영해주는 신규 기능입니다.</p>
+<div class="img-wrap"><img src="imgs/image_grounding_long.png" loading="lazy" alt="Google 검색 기반 대본 생성 - 롱폼"></div>
+<p>체크박스를 활성화하면 대본 생성 시 AI가 Google 검색 결과를 추가로 참조하여 최신 이슈, 실제 수치, 최근 사건 등을 대본에 자연스럽게 녹여줍니다. 과거 학습 데이터는 그대로 유지되면서 최신성과 정확성이 함께 강화됩니다.</p>
+<p>특히 시사, 경제, 정치, 뉴스, 트렌드처럼 <strong>최신 정보가 중요한 카테고리</strong>에서 효과가 큽니다. 반대로 야사/야담 카테고리는 최신성보다 역사적 사실이 중요하므로 해당 카테고리 선택 시 자동으로 비활성화됩니다.</p>
+<p>단, Google 검색 과정이 추가되므로 <strong>대본 생성 시간이 다소 늘어날 수 있습니다.</strong> 최신 정보 반영이 필요하지 않은 주제라면 체크를 해제하고 사용하셔도 됩니다.</p>
 <div class="img-wrap"><img src="imgs/image84.png" loading="lazy" alt="스크린샷"></div>
 <p>다음 아래에 보시면 고정 캐릭터 설정이라는게 있습니다.  이건 영상 각 씬마다 고정 캐릭터가 등장하게 하는 기능입니다. 원하는 캐릭터가 있다면 설명문구에 넣어주시면 됩니다. 특정 캐릭터를 설명하는 문구를 넣으면 그 문구에 맞는 캐릭터를 인공지능이 생성하여 각 씬 이미지 마다 등장을 시켜 줍니다. 만약 캐릭터가 필요없다고 하시면 공란으로 그냥 놔두셔도 상관없습니다.</p>
 <div class="img-wrap"><img src="imgs/image85.png" loading="lazy" alt="스크린샷"></div>
 <div class="img-wrap"><img src="imgs/image86.png" loading="lazy" alt="스크린샷"></div>
 <p>보시는바와 같이 안경쓴 백호캐릭터라고 작성하자 안경쓴 백호캐릭터가 씬마다 등장하는 것을 보실 수 있습니다.</p>
 <div class="img-wrap"><img src="imgs/image87.png" loading="lazy" alt="스크린샷"></div>
+<h3>캐릭터 참조 이미지 업로드 (이미지 직접 사용)</h3>
+<p>텍스트로 캐릭터를 설명하는 방식 외에, <strong>직접 보유하고 있는 캐릭터 이미지를 업로드</strong>하여 해당 캐릭터를 모든 씬에 반영시키는 방법도 있습니다. 홈/생성 탭에서 이미지 생성 모델 섹션 아래에 <strong>캐릭터 참조 이미지(선택)</strong> 항목이 있습니다.</p>
+<div class="img-wrap"><img src="imgs/image_char_upload_long.png" loading="lazy" alt="캐릭터 참조 이미지 업로드 - 롱폼"></div>
+<p>이미지 선택 버튼을 눌러 원하는 캐릭터 이미지 파일을 업로드하면 해당 인물 이미지를 AI가 캐릭터 레퍼런스로 활용하여 모든 씬에 동일한 캐릭터가 등장하도록 이미지를 생성합니다. 이 기능은 <strong>Gemini 3 Pro Image</strong> 모델을 선택했을 때 활성화됩니다. (Gemini 3 Pro Image 사용 시 API 관리 탭에서 Gemini API 키 등록 필요)</p>
+<p>업로드할 이미지는 <strong>16:9 롱폼 사이즈에 맞는 이미지</strong>를 사용하시는 것을 권장드립니다. 텍스트 설명 없이 이미지만 업로드해도 일관된 캐릭터가 유지됩니다.</p>
 <p>위에서 선택 사항을 마쳤다면 가장 하단에는 딸깍 버튼과 단계별 생성 버튼이 있습니다.</p>
 <p>딸깍 버튼은 키워드나 벤치마킹 대본을 입력하고 해당 딸깍 버튼을 누르면 대본 생성과 이미지 생성 그리고 음성더빙과 자막생성까지의 과정이 모두 한번에 자동화되어 이루어지며. 이 모든것을 하나로 합쳐 영상으로 만들어내는 과정까지!! 모든 전 과정을 자동화하는 기능입니다.</p>
 <p>단계별 생성의 경우에는 대본이 생성되면 대본 확인을 하는 단계를 거치고 이미지가 생성되면 이미지 확인 과정을 거치고 중간에 이미지를 영상으로 전환을 하거나. 음성 선택을 하거나 등등 몇가지 필요한 사항을 선택하면서 단계별로 자동화 진행시키는 버튼입니다. 단계별 생성도 선택만 하면 대본과 이미지 음성더빙, 자막생성 등 모든 것이 자동화로 이루어지며 랜더링 시스템으로 영상화로 마지막 편집까지 자동으로 이루어집니다.</p>
@@ -441,6 +460,11 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>마지막으로 랜더링 시작 버튼을 클릭해주면 자동으로 그동안 확인했던 모든 사항이 여기서 최종 편집되어 완성된 영상 결과물을 보여주게 됩니다. 완성된 결과물은 다운로드 하셔서 직접 업로드 하시거나 업로드 설정으로 자동 업로드 되게 하실 수 있습니다. 유튜브 자동 업로드 설정 방법은 목차8번에서 확인하시기 바랍니다.</p>
 <div class="img-wrap"><img src="imgs/image109.png" loading="lazy" alt="스크린샷"></div>
 <p>마지막으로 만들어진 영상 결과가 나오면 바로 해당 창에서 재생해서 확인해볼 수 있으며 다운로드도 가능합니다. 다운로드 받으신 후 업로드 하시면 됩니다. 아래 초기화 버튼의 경우 영상 생성 전 과정을 초기화하여 새로운 영상을 또 만들수 있게 전부 초기화하여 줍니다.</p>
+<h3>SNS 콘텐츠 변환 — 영상 대본으로 SNS 글 자동 발행</h3>
+<p>영상 완성 후 렌더링 탭에는 <strong>SNS 콘텐츠 변환</strong> 기능이 추가되어 있습니다. 완성된 영상의 대본을 바탕으로 각 SNS에 최적화된 글을 자동으로 생성하여 바로 활용하실 수 있습니다.</p>
+<div class="img-wrap"><img src="imgs/image_sns_publish.png" loading="lazy" alt="SNS 콘텐츠 변환"></div>
+<p>발행하고자 하는 SNS 채널을 선택하신 후 <strong>SNS 콘텐츠 생성</strong> 버튼을 누르면 해당 SNS에 맞는 형식으로 글이 자동 생성됩니다. 롱폼 프로그램에서는 <strong>블로그, 스레드, 인스타그램, 페이스북</strong> 총 4가지 SNS를 지원합니다.</p>
+<p>생성된 글은 해시태그와 함께 출력되며 영상 이미지도 함께 표시됩니다. 전체 복사 버튼으로 내용을 바로 복사하여 각 SNS에 붙여넣기 하시면 됩니다. 유튜브 영상 업로드와 SNS 홍보를 동시에 진행할 수 있어 채널 운영 효율이 크게 높아집니다.</p>
 <p>여기까지 NOBLE ARC 유튜브 자동화 롱폼 전용 프로그램에 대한 사용법 설명을 마치겠습니다.</p>
 <h2 id="sec-6쇼츠-전용프로그램-사용법">6.쇼츠 전용프로그램 사용법</h2>
 <p>지금부터 NOBLE ARC  쇼츠 유튜브 자동화 프로그램 사용법에 대해서 자세히 설명드리겠습니다</p>
@@ -471,6 +495,11 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>마지막으로 <strong>직접입력</strong> 탭입니다. 직접 작성한 대본이나 다른 곳에서 생성한 대본이 있다면 이곳에 붙여넣기 하여 AI 대본 생성 없이 바로 쇼츠 영상을 만들 수 있습니다.</p>
 <div class="img-wrap"><img src="imgs/image203.png" loading="lazy" alt="스크린샷"></div>
 <p>직접입력 탭을 선택하시면 대본을 직접 붙여넣을 수 있는 텍스트 입력창이 나타납니다. 사용법 안내처럼 작성한 대본을 붙여넣으면 문장 단위로 씬이 자동 분리되어 영상으로 만들어집니다. 마침표(.), 물음표(?), 느낌표(!) 기준으로 씬이 분리되며 선택한 영상 길이(씬 수)를 참고해 1~2문장씩 묶어줍니다. 대본 입력 후 하단에 글자수, 예상 씬 수, 권장 영상 길이가 자동 계산되어 표시됩니다. 딸깍 또는 단계별 생성 버튼을 누르면 AI 대본 생성 단계는 건너뛰고 이미지 생성·음성 더빙·자막·렌더링 과정이 자동으로 진행됩니다.</p>
+<h3>Google 검색 기반 대본 생성</h3>
+<p>키워드 생성, 벤치마크 대본, 원본가공, 썰/야담 탭 사용 시 하단에 <strong>Google 검색 기반 대본 생성</strong> 체크박스가 표시됩니다. 이 기능은 대본 생성 과정에서 Google 검색을 실시간으로 참조하여 최신 정보와 사실을 대본에 반영해주는 신규 기능입니다.</p>
+<div class="img-wrap"><img src="imgs/image_grounding_shorts.png" loading="lazy" alt="Google 검색 기반 대본 생성 - 쇼츠"></div>
+<p>체크하시면 대본 생성 시 AI가 Google 검색 결과를 추가로 참조하여 최신 이슈, 수치, 사건 등을 반영한 대본을 만들어줍니다. 과거 학습 데이터는 그대로 유지하면서 최신성과 정확성이 동시에 강화됩니다.</p>
+<p>최신 정보가 중요한 주제(시사, 뉴스, 트렌드 등)에서 특히 효과적입니다. 단, 검색 과정이 추가되어 <strong>생성 시간이 다소 늘어날 수 있습니다.</strong> 최신 정보가 필요하지 않은 주제라면 체크를 해제하고 사용하셔도 됩니다.</p>
 <div class="img-wrap"><img src="imgs/image118.png" loading="lazy" alt="스크린샷"></div>
 <p>다음은 대본검토 탭입니다. 단계별 생성으로 대본을 생성하면 여기서 대본 검토를 하실 수 있습니다. 각 씬별로 대본이 분리되어 보이며 위의 전체 복사를 통해 대본을 복사하실수도 있습니다.</p>
 <div class="img-wrap"><img src="imgs/image119.png" loading="lazy" alt="스크린샷"></div>
@@ -495,6 +524,11 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <div class="img-wrap"><img src="imgs/image127.png" loading="lazy" alt="스크린샷"></div>
 <p>세부설정 마지막 탭에는 고정 캐릭터 설정이라는게 있습니다.  이건 영상 각 씬마다 고정 캐릭터가 등장하게 하는 기능입니다. 원하는 캐릭터가 있다면 설명문구에 넣어주시면 됩니다. 특정 캐릭터를 설명하는 문구를 넣으면 그 문구에 맞는 캐릭터를 인공지능이 생성하여 각 씬 이미지 마다 등장을 시켜 줍니다. 만약 캐릭터가 필요없다고 하시면 공란으로 그냥 놔두셔도 상관없습니다.</p>
 <div class="img-wrap"><img src="imgs/image128.png" loading="lazy" alt="스크린샷"></div>
+<h3>캐릭터 참조 이미지 업로드 (이미지 직접 사용)</h3>
+<p>텍스트로 캐릭터를 설명하는 방식 외에, <strong>직접 보유하고 있는 캐릭터 이미지를 업로드</strong>하여 해당 캐릭터를 모든 씬에 반영시킬 수 있습니다. 세부설정의 <strong>캐릭터 탭</strong>에서 이미지 생성 모델 아래 <strong>캐릭터 참조 이미지(선택)</strong> 항목을 찾으실 수 있습니다.</p>
+<div class="img-wrap"><img src="imgs/image_char_upload_shorts.png" loading="lazy" alt="캐릭터 참조 이미지 업로드 - 쇼츠"></div>
+<p>이미지 선택 버튼을 눌러 원하는 캐릭터 이미지 파일을 업로드하면 AI가 해당 인물 이미지를 캐릭터 레퍼런스로 활용하여 모든 씬에 동일한 캐릭터가 등장하도록 이미지를 생성합니다. 이 기능은 <strong>Gemini 3 Pro Image</strong> 모델 선택 시 활성화됩니다. (API 관리 탭에서 Gemini API 키 등록 필요)</p>
+<p>업로드할 이미지는 <strong>9:16 쇼츠 사이즈에 맞는 이미지</strong>를 사용하시는 것을 권장드립니다. 텍스트 설명 없이 이미지만 업로드해도 일관된 캐릭터가 유지됩니다.</p>
 <p>세부설정이 끝나셨다면 이미지스타일 이동 버튼을 클릭해줍니다. 영상탭에 이미지 스타일로 이동버튼이 있습니다. 또는 왼쪽 탭에서 이미지 스타일 탭을 클릭하시면 됩니다.</p>
 <div class="img-wrap"><img src="imgs/image129.png" loading="lazy" alt="스크린샷"></div>
 <p>쇼츠 전용 프로그램에서 지원하는 이미지 스타일은 총 14가지가 있습니다. 여기서 이미지 스타일을 선택하셔 서 이용하시면 됩니다. 요즘 유행하는 스틱맨, 2D 애니메이션을 비롯하여 웹툰스타일과 썰 전용으로 많이 쓰 이는 치비캐릭터 이미지 스타일 등등 많이 있습니다.</p>
@@ -521,7 +555,12 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>마지막으로 랜더링 시작 버튼을 클릭해주면 자동으로 그동안 확인했던 모든 사항이 여기서 최종 편집되어 완 성된 영상 결과물을 보여주게 됩니다. 완성된 결과물은 다운로드 하셔서 직접 업로드 하시거나 업로드 설정으 로 자동 업로드 되게 하실 수 있습니다. 유튜브 자동 업로드 설정 방법은 목차8번에서 확인하시기 바랍니다.</p>
 <div class="img-wrap"><img src="imgs/image140.png" loading="lazy" alt="스크린샷"></div>
 <div class="img-wrap"><img src="imgs/image141.png" loading="lazy" alt="스크린샷"></div>
-<p>마지막으로 만들어진 영상 결과가 나오면 바로 해당 창에서 재생해서 확인해볼 수 있으며 다운로드도 가능합 니다. 다운로드 받으신 후 업로드 하시면 됩니다. 아래 초기화 버튼의 경우 영상 생성 전 과정을 초기화하여 새 로운 영상을 또 만들수 있게 전부 초기화하여 줍니다. 여기까지 NOBLE ARC 유튜브 자동화 쇼츠 전용 프로그램에 대한 사용법 설명을 마치겠습니다.</p>
+<p>마지막으로 만들어진 영상 결과가 나오면 바로 해당 창에서 재생해서 확인해볼 수 있으며 다운로드도 가능합 니다. 다운로드 받으신 후 업로드 하시면 됩니다. 아래 초기화 버튼의 경우 영상 생성 전 과정을 초기화하여 새 로운 영상을 또 만들수 있게 전부 초기화하여 줍니다.</p>
+<h3>SNS 콘텐츠 변환 — 영상 대본으로 SNS 글 자동 발행</h3>
+<p>영상 완성 후 렌더링 탭에는 <strong>SNS 콘텐츠 변환</strong> 기능이 추가되어 있습니다. 완성된 영상의 대본을 바탕으로 각 SNS에 최적화된 글을 자동으로 생성하여 바로 활용하실 수 있습니다.</p>
+<p>발행하고자 하는 SNS 채널을 선택하신 후 <strong>SNS 콘텐츠 생성</strong> 버튼을 누르면 해당 SNS에 맞는 형식으로 글이 자동 생성됩니다. 쇼츠 프로그램에서는 <strong>스레드, 인스타그램, 페이스북</strong> 총 3가지 SNS를 지원합니다.</p>
+<p>생성된 글은 해시태그와 함께 출력되며 영상 이미지도 함께 표시됩니다. 전체 복사 버튼으로 내용을 바로 복사하여 각 SNS에 붙여넣기 하시면 됩니다. 쇼츠 영상 업로드와 SNS 홍보를 동시에 진행할 수 있어 채널 운영 효율이 크게 높아집니다.</p>
+<p>여기까지 NOBLE ARC 유튜브 자동화 쇼츠 전용 프로그램에 대한 사용법 설명을 마치겠습니다.</p>
 <h2 id="sec-7리서치센터-사용법">7.리서치센터 사용법</h2>
 <div class="img-wrap"><img src="imgs/image142.png" loading="lazy" alt="스크린샷"></div>
 <p>자 이제부터 리서치센터에 대해서 자세히 알려드리겠습니다. 저희 NOBLE ARC 프로그램은 리서치센터를 통해 좋은 소재를 발굴할 수 있는 시스템을 지원해드리고 있습니다. 유튜브에서 엄청난 조회수를 기록한 떡상 인기 영상을 검색해서 찾아낼 수 있고 그 영상을 벤치마킹 할 수 있고 경쟁자 채널분석을 통해 유명 유튜버들의 유튜브 채널 운영 형태를 분석해낼 수도 있습니다. 또한 최근 트렌드 검색을 통해 뜨고있는 검색어 키워드를 쉽게 찾아 낼 수 있으며 해당 키워드의 뉴스 정보도 쉽게 검색해서 소재를 발굴하실 수 있도록 지원해드리고 있습니다. 리서치센터를 이용하시기 위해서는 유튜브 API키를 반드시 발급 받으셔야 합니다. 아직 발급을 받지 않으셨다면 4-6 목차에서 유튜브 API키 발급 방법 설명을 보시면서 먼저 발급받고 오시기를 권해드립니다.</p>
@@ -628,6 +667,10 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <p>그러면 위와 같은 화면이 나올텐데요 거의 다왔습니다. 여기서 허용버튼을 클릭해주세요</p>
 <div class="img-wrap"><img src="imgs/image175.png" loading="lazy" alt="스크린샷"></div>
 <p>이렇게 되면 NOBLE ARC 프로그램에 유튜브 인증 완료가 뜹니다. 이제부터는 유튜브 업로드를 하실 수 있습니다.</p>
+<h3>여러 유튜브 채널 추가 등록 방법</h3>
+<p>유튜브 채널을 여러 개 운영하고 계신다면 채널마다 각각 등록하여 사용하실 수 있습니다. 앞서 테스트 사용자를 등록한 Google Cloud Console 화면에서 <strong>+ Add users</strong> 버튼을 클릭하여 추가할 유튜브 계정의 이메일 주소를 입력하면 해당 계정도 테스트 사용자로 등록됩니다.</p>
+<p>이후 NOBLE ARC 프로그램으로 돌아와 추가한 이메일 계정으로 동일하게 인증 절차를 진행하시면 해당 계정에 연결된 유튜브 채널이 채널 목록에 추가됩니다. 이 과정을 반복하면 <strong>여러 유튜브 채널을 제한 없이 등록</strong>하실 수 있습니다.</p>
+<p>렌더링 탭에서 업로드할 채널을 목록에서 선택해두시면, 영상이 완성될 때 선택한 채널로 자동 업로드가 이루어집니다. 채널별로 콘텐츠를 분리하여 운영하시는 분들께 특히 유용한 기능입니다.</p>
 <h2 id="sec-9쇼츠-영상-대량제작-방법">9.쇼츠 영상 대량제작 방법</h2>
 <p>대량생산 탭은 유튜브 소재를 대량으로 등록하고 딸깍 시스템과 연동해서 연속적으로 영상을 생성하는 도구입니다. 완성 후 업로드까지 가능하도록 설정되어 있습니다. 쇼츠에서만 가능한 기능입니다. 다만 유튜브 API키로 자동 업로드는 1일 6회만 가능하므로 참고하시기 바랍니다. 자동 업로드 보다는 대량 생성에 초점을 맞춰 진행하시는게 좋고 생성된 영상을 스마트폰으로 옮겨 스마트폰에서 괜찮은 이미지를 썸네일로 맞추는 방식으로 업로드 하시는 것을 추천드립니다.</p>
 <p>영상을 하나하나 생성하는 번거로움을 벗어나 한꺼번에 대량 생성을 하는 편의성을 확대하는데 초점을 맞춘 기능이라고 보시면 됩니다.</p>
