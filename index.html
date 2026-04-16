@@ -1466,5 +1466,23 @@ async function submitReply() {
   }
 }
 </script>
+
+<!-- 카카오 채널 플로팅 버튼 -->
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+  integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+  crossorigin="anonymous"></script>
+<div id="kakao-channel-chat-button" style="position:fixed;bottom:24px;right:24px;z-index:9000;"></div>
+<script>
+  Kakao.init('5d9b4f102acd496a8772ea86c9015001');
+  Kakao.Channel.createChatButton({
+    container: '#kakao-channel-chat-button',
+    channelPublicId: '_WdxixlX',
+    title: 'consult',
+    size: 'large',
+    color: 'yellow',
+    shape: 'pc',
+    supportMultipleDensities: true,
+  });
+</script>
 </body>
 </html>
