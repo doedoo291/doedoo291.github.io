@@ -328,7 +328,7 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <div class="img-wrap"><img src="imgs/image79.png" loading="lazy" alt="스크린샷"></div>
 <p>유튜브 API키는 다른 API키와는 다르게 리서치센터에 저장공간이 따로 있습니다. 여기서 키를 관리하시면 됩니다. 리서치센터 전용 API키입니다.</p>
 <h3 id="sec-47-제미나이-API키-발급받기선택">4-7 제미나이(Gemini) API키 발급받기(선택)</h3>
-<p>제미나이(Gemini) API 키는 <strong>Gemini 3 Pro Image 모델</strong>을 이용한 씬 이미지 생성 시에만 필요한 <strong>선택 키</strong>입니다. <strong>썸네일 자동 생성은 Vertex AI + Canvas 조합으로 처리되므로 Gemini API 키가 없어도 정상 동작합니다.</strong> 해당 모델 기능을 사용하지 않으실 경우 기본 이미지 생성은 Vertex AI(서비스 계정)로 정상 동작하므로 발급받으실 필요가 없습니다.</p>
+<p>제미나이(Gemini) API 키는 <strong>Gemini 3 Pro Image 모델</strong>을 이용한 씬 이미지 생성 시 필요한 <strong>선택 키</strong>입니다. 해당 모델을 사용하지 않으실 경우 기본 이미지 생성은 Vertex AI(서비스 계정)로 정상 동작하므로 발급받으실 필요가 없습니다.</p>
 <p>aistudio.google.com</p>
 <p>위 주소를 인터넷 주소창에 복사해서 붙여넣기 하거나, 구글 검색창에 "Google AI Studio"를 검색하여 접속해 주세요. 구글 계정으로 로그인하시면 됩니다.</p>
 <div class="img-wrap"><img src="imgs/gemini_step1.png" loading="lazy" alt="Get API Key 클릭"></div>
@@ -340,8 +340,7 @@ p{font-size:14px;line-height:1.9;color:#ccc;margin-bottom:12px;padding:0 4px}
 <div class="img-wrap"><img src="imgs/gemini_step4.png" loading="lazy" alt="키 만들기 버튼 클릭"></div>
 <p>프로젝트 선택 후 하단의 <strong>키 만들기</strong> 버튼을 클릭하시면 API 키가 생성됩니다.</p>
 <p>⚠️ <strong>중요 — 유료 과금 안내 (반드시 확인하세요)</strong><br>
-<strong>2026년 4월 기준, Gemini API는 Google Cloud $300 무료 크레딧이 적용되지 않습니다.</strong> 빌링 계정을 연결하는 순간 Tier 1(후불)로 전환되며, 이후 사용량에 따라 실제 요금이 청구됩니다. Gemini 3 Pro Image 모델은 씬 이미지 한 장 생성 시마다 비용이 발생합니다. 사용 빈도가 낮으면 소액이지만, 영상을 대량 자동 생성하는 경우 누적 비용이 발생할 수 있으니 본인의 사용 패턴을 고려하여 발급 여부를 결정하시기 바랍니다. 무료 플랜(Tier 0, 빌링 미연결) 상태에서도 키를 발급받을 수 있으나 요청 한도가 매우 낮아 오류가 발생할 수 있습니다.<br>
-<strong>※ 썸네일 자동 생성은 Vertex AI + Canvas 방식으로 처리되므로 Gemini API 키 없이도 사용 가능합니다.</strong></p>
+<strong>2026년 4월 기준, Gemini API는 Google Cloud $300 무료 크레딧이 적용되지 않습니다.</strong> 빌링 계정을 연결하는 순간 Tier 1(후불)로 전환되며, 이후 사용량에 따라 실제 요금이 청구됩니다. Gemini 3 Pro Image 모델은 씬 이미지 한 장 생성 시마다 비용이 발생합니다. 사용 빈도가 낮으면 소액이지만, 영상을 대량 자동 생성하는 경우 누적 비용이 발생할 수 있으니 본인의 사용 패턴을 고려하여 발급 여부를 결정하시기 바랍니다. 무료 플랜(Tier 0, 빌링 미연결) 상태에서도 키를 발급받을 수 있으나 요청 한도가 매우 낮아 오류가 발생할 수 있습니다.</p>
 <div class="img-wrap"><img src="imgs/gemini_step5.png" loading="lazy" alt="복사 버튼 클릭"></div>
 <p>API 키가 생성되면 목록에서 해당 키 옆의 <strong>복사 버튼</strong>을 클릭하여 복사해 주세요.</p>
 <p>복사하신 API 키를 NOBLE ARC 프로그램의 <strong>API 키 관리</strong> 탭 → <strong>Gemini API</strong> 입력란에 붙여넣기 하신 후 저장 버튼을 누르시면 됩니다. 한번 저장해두시면 계속 보관되어 재입력하실 필요가 없습니다.</p>
